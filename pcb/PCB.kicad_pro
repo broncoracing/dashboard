@@ -359,7 +359,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "STM32F103_Reference.kicad_pro",
+    "filename": "PCB.kicad_pro",
     "version": 1
   },
   "net_settings": {
@@ -511,6 +511,26 @@
     [
       "68f34db6-b185-48e2-8817-fb07f7d1240e",
       ""
+    ],
+    [
+      "785c2b5b-0f6e-472e-8e4b-b02b70d5cf35",
+      "Power supply"
+    ],
+    [
+      "339b743c-6ece-4c09-bcfc-fa4dc50d1069",
+      "Microcontroller"
+    ],
+    [
+      "df194633-7ff5-4f5d-be82-5fcc910fecf4",
+      "Segment displays"
+    ],
+    [
+      "5ad5ec5b-c9b4-4423-954d-24d16ed8fc84",
+      "IO"
+    ],
+    [
+      "c2620eae-eace-4cc3-85c7-9b52b66bfb25",
+      "WS2812"
     ]
   ],
   "text_variables": {}
