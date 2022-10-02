@@ -595,6 +595,12 @@
     (path "/e7f26afc-34fd-4c62-9f7d-a676e37cf9b3"
       (reference "#PWR0106") (unit 1) (value "GND") (footprint "")
     )
+    (path "/5ad5ec5b-c9b4-4423-954d-24d16ed8fc84/c0f6d342-814a-4019-9644-b191a9f845a3"
+      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/5ad5ec5b-c9b4-4423-954d-24d16ed8fc84/f674f021-ad09-4536-8a30-338efa0acdb2"
+      (reference "#PWR?") (unit 1) (value "+12V") (footprint "")
+    )
     (path "/785c2b5b-0f6e-472e-8e4b-b02b70d5cf35/3cbd1b73-4e69-4ccd-9986-b78be831ca28"
       (reference "C1") (unit 1) (value "10u") (footprint "Capacitor_SMD:C_0805_2012Metric")
     )
@@ -866,10 +872,13 @@
       (reference "J1") (unit 1) (value "TC2030") (footprint "Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical")
     )
     (path "/5ad5ec5b-c9b4-4423-954d-24d16ed8fc84/1548074c-212b-4f9a-8d69-9b6808199654"
-      (reference "J2") (unit 1) (value "JST B24B-PADSS-F") (footprint "Connector_JST:JST_PHD_B24B-PHDSS_2x12_P2.00mm_Vertical")
+      (reference "J2") (unit 1) (value "JST B24B-PADSS-F") (footprint "JST_B24B_PADSS:JST_B24B_PADSS")
     )
     (path "/339b743c-6ece-4c09-bcfc-fa4dc50d1069/be97a815-e680-4982-aa53-55c44aeae86c"
       (reference "J3") (unit 1) (value "TC2030") (footprint "Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical")
+    )
+    (path "/5ad5ec5b-c9b4-4423-954d-24d16ed8fc84/216217a3-8252-4092-9248-5b20a838cb0e"
+      (reference "J4") (unit 1) (value "JST B04B-XASK") (footprint "Connector_JST:JST_XA_B04B-XASK-1_1x04_P2.50mm_Vertical")
     )
     (path "/5ad5ec5b-c9b4-4423-954d-24d16ed8fc84/434ded49-eb8b-49d8-8169-eb1a47b0bb14"
       (reference "JP1") (unit 1) (value "Jumper_2_Bridged") (footprint "TestPoint:TestPoint_2Pads_Pitch2.54mm_Drill0.8mm")

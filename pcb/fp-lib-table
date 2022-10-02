@@ -1,4 +1,5 @@
 (fp_lib_table
   (lib (name "segment_display")(type "KiCad")(uri "${KIPRJMOD}/kicad-libraries/segment_display.pretty")(options "")(descr ""))
   (lib (name "DTM_Headers")(type "KiCad")(uri "${KIPRJMOD}/kicad-libraries/DTM_Headers")(options "")(descr ""))
+  (lib (name "JST_B24B_PADSS")(type "KiCad")(uri "${KIPRJMOD}/kicad-libraries/JST_B24B_PADSS.pretty")(options "")(descr ""))
 )
