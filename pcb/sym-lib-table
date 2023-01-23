@@ -1,5 +1,5 @@
 (sym_lib_table
   (lib (name "TC2030")(type "KiCad")(uri "${KIPRJMOD}/kicad-libraries/TC2030.kicad_sym")(options " pwr_sym_only")(descr ""))
-  (lib (name "segment_display")(type "KiCad")(uri "/home/jackl/.local/share/kicad/6.0/symbols/segment_display.kicad_sym")(options "")(descr ""))
+  (lib (name "segment_display")(type "KiCad")(uri "${KIPRJMOD}/kicad-libraries/segment_display.kicad_sym")(options "")(descr ""))
   (lib (name "DTF15-12PA")(type "Legacy")(uri "${KIPRJMOD}/kicad-libraries/DTM_Headers/DTF15-12PA.lib")(options "")(descr ""))
 )
