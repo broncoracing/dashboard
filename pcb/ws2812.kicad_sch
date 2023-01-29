@@ -306,7 +306,6 @@
     )
   )
 
-
   (junction (at 111.76 57.15) (diameter 0) (color 0 0 0 0)
     (uuid 0195f456-5975-4713-871d-51f30b257742)
   )
@@ -1458,6 +1457,9 @@
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 100.33 64.77 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "C25104" (id 4) (at 100.33 64.77 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid 016b1835-3285-4313-a00e-79c7819abf1e))
