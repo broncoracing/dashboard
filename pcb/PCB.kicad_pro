@@ -452,14 +452,6 @@
           "DIAL7",
           "DIAL8",
           "DIAL9",
-          "LED_DATA",
-          "LED_DATA_3V3",
-          "SEGMENT_RCLK",
-          "SEGMENT_RCLK_3V3",
-          "SEGMENT_SER",
-          "SEGMENT_SER_3V3",
-          "SEGMENT_SRCLK",
-          "SEGMENT_SRCLK_3V3",
           "SWCLK",
           "SWDIO",
           "SWO"
@@ -540,8 +532,8 @@
       "Microcontroller"
     ],
     [
-      "df194633-7ff5-4f5d-be82-5fcc910fecf4",
-      "Segment displays"
+      "99721f81-930a-4c83-8251-35b9148e6cee",
+      "Tachometer"
     ],
     [
       "5ad5ec5b-c9b4-4423-954d-24d16ed8fc84",
@@ -550,6 +542,42 @@
     [
       "c2620eae-eace-4cc3-85c7-9b52b66bfb25",
       "WS2812"
+    ],
+    [
+      "ccd2db12-79dd-4cb3-828d-c3b37e403a0b",
+      "Shift Lights"
+    ],
+    [
+      "bdc0dacb-eb0d-4d14-a7f7-6cd0b4f0b6e3",
+      "Digit 1"
+    ],
+    [
+      "8aa47305-b620-405c-af52-31b0a6bd340b",
+      "Digit 0"
+    ],
+    [
+      "6e01c56b-11ec-4a6e-be0b-2377fa1de37f",
+      "Digit 2"
+    ],
+    [
+      "9896f18b-3bbc-455b-b08f-2c6cd94090dd",
+      "Digit 3"
+    ],
+    [
+      "9a036d87-ce07-4c99-be1b-db19c347f60b",
+      "Digit 4"
+    ],
+    [
+      "4df892e7-ad06-4575-bd9f-6af6e3df74ab",
+      "Digit 5"
+    ],
+    [
+      "f73c095e-19b5-4ca2-82b2-71d1369b65a4",
+      "5V 3A Buck Regulator"
+    ],
+    [
+      "bb437566-7d32-450d-b77e-65f68738184c",
+      "5V 3A Ext Buck Regulator"
     ]
   ],
   "text_variables": {}

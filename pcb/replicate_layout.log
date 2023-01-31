@@ -1,0 +1,81 @@
+01-30 18:51:01 com_github_MitjaNemec_ReplicateLayout.action_replicate_layout 303:Plugin executed on: 'linux'
+01-30 18:51:01 com_github_MitjaNemec_ReplicateLayout.action_replicate_layout 304:Plugin executed with python version: '3.10.9 (main, Dec 19 2022, 17:35:49) [GCC 12.2.0]'
+01-30 18:51:01 com_github_MitjaNemec_ReplicateLayout.action_replicate_layout 305:KiCad build version: (6.0.10)
+01-30 18:51:01 com_github_MitjaNemec_ReplicateLayout.action_replicate_layout 306:Plugin version: 1.2.1
+01-30 18:51:01 com_github_MitjaNemec_ReplicateLayout.action_replicate_layout 307:Frame repr: <wx._core.Frame object at 0x7fe13a95f1c0>
+01-30 18:51:01 com_github_MitjaNemec_ReplicateLayout.action_replicate_layout 331:Preparing replicator with D57 as a reference
+01-30 18:51:01 com_github_MitjaNemec_ReplicateLayout.replicate_layout 106:getting a list of all footprints on board
+01-30 18:51:01 com_github_MitjaNemec_ReplicateLayout.action_replicate_layout 359:source anchor footprint is 'D57'
+Located on: ['WS2812', 'Digit 0']
+With filenames: ['ws2812.kicad_sch', 'led_digit.kicad_sch']
+With sheet_id:['WS2812', 'Digit 0']
+01-30 18:51:01 com_github_MitjaNemec_ReplicateLayout.action_replicate_layout 366:Corresponding footprints are 
+[('D117', ['WS2812', 'Digit 5']), ('D102', ['WS2812', 'Digit 4']), ('D87', ['WS2812', 'Digit 3']), ('D72', ['WS2812', 'Digit 2']), ('D57', ['WS2812', 'Digit 0']), ('D42', ['WS2812', 'Digit 1'])]
+01-30 18:51:01 com_github_MitjaNemec_ReplicateLayout.action_replicate_layout 378:Showing dialog
+01-30 18:51:01 com_github_MitjaNemec_ReplicateLayout.replicate_layout 344:constructing a list of sheets suitable for replication on level:'Digit 0', file:'led_digit.kicad_sch'
+01-30 18:51:01 com_github_MitjaNemec_ReplicateLayout.replicate_layout 381:suitable sheets are:[['WS2812', 'Digit 1'], ['WS2812', 'Digit 2'], ['WS2812', 'Digit 3'], ['WS2812', 'Digit 4'], ['WS2812', 'Digit 5']]
+01-30 18:51:01 com_github_MitjaNemec_ReplicateLayout.replicate_layout 1112:Level selected: ['WS2812', 'Digit 0']
+01-30 18:51:01 com_github_MitjaNemec_ReplicateLayout.action_replicate_layout 384:Toolbar position: wx.Point(1701, 152)
+01-30 18:51:01 com_github_MitjaNemec_ReplicateLayout.action_replicate_layout 390:Dialog position: wx.Point(1337, 152)
+01-30 18:51:03 com_github_MitjaNemec_ReplicateLayout.replicate_layout 344:constructing a list of sheets suitable for replication on level:'Digit 0', file:'led_digit.kicad_sch'
+01-30 18:51:03 com_github_MitjaNemec_ReplicateLayout.replicate_layout 381:suitable sheets are:[['WS2812', 'Digit 1'], ['WS2812', 'Digit 2'], ['WS2812', 'Digit 3'], ['WS2812', 'Digit 4'], ['WS2812', 'Digit 5']]
+01-30 18:51:03 com_github_MitjaNemec_ReplicateLayout.action_replicate_layout 157:Replicating layout
+01-30 18:51:03 com_github_MitjaNemec_ReplicateLayout.replicate_layout 154:Starting replication of sheets: [['WS2812', 'Digit 1'], ['WS2812', 'Digit 2'], ['WS2812', 'Digit 3'], ['WS2812', 'Digit 4'], ['WS2812', 'Digit 5']]
+on level: ['WS2812', 'Digit 0']
+with tracks=True, zone=True, text=True, text=True, containing=True, remove=False, locked footprints=False, by_group=False
+01-30 18:51:03 root 243:updating GUI message: 'Preparing for replication'
+01-30 18:51:04 root 248:updating GUI with: 0
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 224:Getting the list of source footprints
+01-30 18:51:04 root 248:updating GUI with: 0
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 239:Getting the list of all the remaining footprints
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 244:Getting nets local to source footprints
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 247:Getting source bounding box
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 251:Getting source tracks
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 266:Getting source zones
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 275:Getting source text items
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 284:Getting source drawing items
+01-30 18:51:04 root 243:updating GUI message: 'Replicating footprints'
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 678:Replicating footprints
+01-30 18:51:04 root 248:updating GUI with: 0
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 684:Replicating footprints on sheet ['WS2812', 'Digit 1']
+01-30 18:51:04 root 248:updating GUI with: 1
+01-30 18:51:04 root 248:updating GUI with: 13
+01-30 18:51:04 root 248:updating GUI with: 17
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 684:Replicating footprints on sheet ['WS2812', 'Digit 2']
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 684:Replicating footprints on sheet ['WS2812', 'Digit 3']
+01-30 18:51:04 root 248:updating GUI with: 46
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 684:Replicating footprints on sheet ['WS2812', 'Digit 4']
+01-30 18:51:04 root 248:updating GUI with: 62
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 684:Replicating footprints on sheet ['WS2812', 'Digit 5']
+01-30 18:51:04 root 248:updating GUI with: 92
+01-30 18:51:04 root 243:updating GUI message: 'Replicating tracks'
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 844:Replicating tracks
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 850:Replicating tracks on sheet ['WS2812', 'Digit 1']
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 850:Replicating tracks on sheet ['WS2812', 'Digit 2']
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 850:Replicating tracks on sheet ['WS2812', 'Digit 3']
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 850:Replicating tracks on sheet ['WS2812', 'Digit 4']
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 850:Replicating tracks on sheet ['WS2812', 'Digit 5']
+01-30 18:51:04 root 243:updating GUI message: 'Replicating zones'
+01-30 18:51:04 root 248:updating GUI with: 0
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 909:Replicating zones
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 916:Replicating zones on sheet ['WS2812', 'Digit 1']
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 916:Replicating zones on sheet ['WS2812', 'Digit 2']
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 916:Replicating zones on sheet ['WS2812', 'Digit 3']
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 916:Replicating zones on sheet ['WS2812', 'Digit 4']
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 916:Replicating zones on sheet ['WS2812', 'Digit 5']
+01-30 18:51:04 root 243:updating GUI message: 'Replicating text'
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 985:Replicating text
+01-30 18:51:04 root 248:updating GUI with: 0
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 992:Replicating text on sheet ['WS2812', 'Digit 1']
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 992:Replicating text on sheet ['WS2812', 'Digit 2']
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 992:Replicating text on sheet ['WS2812', 'Digit 3']
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 992:Replicating text on sheet ['WS2812', 'Digit 4']
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 992:Replicating text on sheet ['WS2812', 'Digit 5']
+01-30 18:51:04 root 243:updating GUI message: 'Replicating drawings'
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 1032:Replicating drawings
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 1038:Replicating drawings on sheet ['WS2812', 'Digit 1']
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 1038:Replicating drawings on sheet ['WS2812', 'Digit 2']
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 1038:Replicating drawings on sheet ['WS2812', 'Digit 3']
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 1038:Replicating drawings on sheet ['WS2812', 'Digit 4']
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.replicate_layout 1038:Replicating drawings on sheet ['WS2812', 'Digit 5']
+01-30 18:51:04 com_github_MitjaNemec_ReplicateLayout.action_replicate_layout 177:Replication complete
