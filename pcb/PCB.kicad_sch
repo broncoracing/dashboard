@@ -1133,274 +1133,274 @@
       (reference "D37") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/bdc0dacb-eb0d-4d14-a7f7-6cd0b4f0b6e3/3e65517f-c6c4-401b-9aa3-2a815464aeab"
-      (reference "D38") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D38") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/bdc0dacb-eb0d-4d14-a7f7-6cd0b4f0b6e3/6a5a2c86-76d1-4e17-b350-234a1b3551a2"
-      (reference "D39") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D39") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/bdc0dacb-eb0d-4d14-a7f7-6cd0b4f0b6e3/3263614b-b226-4044-b65d-b4dc64138a6f"
-      (reference "D40") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D40") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/bdc0dacb-eb0d-4d14-a7f7-6cd0b4f0b6e3/bfca9a21-6e66-4536-959f-5948335307b8"
-      (reference "D41") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D41") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/bdc0dacb-eb0d-4d14-a7f7-6cd0b4f0b6e3/148ed067-3987-4cb9-8862-328e9fbcdb7d"
-      (reference "D42") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D42") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/bdc0dacb-eb0d-4d14-a7f7-6cd0b4f0b6e3/e5956185-de20-4baf-96bb-a0d0d57a5344"
-      (reference "D43") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D43") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/bdc0dacb-eb0d-4d14-a7f7-6cd0b4f0b6e3/34a34128-f9af-4de6-a2c7-03de26f807da"
-      (reference "D44") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D44") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/bdc0dacb-eb0d-4d14-a7f7-6cd0b4f0b6e3/a7eadd9f-63b6-4f67-bc65-9083314ef9c1"
-      (reference "D45") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D45") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/bdc0dacb-eb0d-4d14-a7f7-6cd0b4f0b6e3/d7f52c65-0053-4642-8340-04ad9daf58f4"
-      (reference "D46") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D46") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/bdc0dacb-eb0d-4d14-a7f7-6cd0b4f0b6e3/0ef2fc7c-bd88-49e4-be5c-9d50dee85f5b"
-      (reference "D47") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D47") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/bdc0dacb-eb0d-4d14-a7f7-6cd0b4f0b6e3/c0400e2b-f4b3-4fcc-983f-e9138f13ca12"
-      (reference "D48") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D48") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/bdc0dacb-eb0d-4d14-a7f7-6cd0b4f0b6e3/d686038c-4417-4b84-bf9f-053d7a91eec6"
-      (reference "D49") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D49") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/bdc0dacb-eb0d-4d14-a7f7-6cd0b4f0b6e3/940f74a2-f04f-4ce8-8d98-9ccb6260fc0e"
-      (reference "D50") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D50") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/bdc0dacb-eb0d-4d14-a7f7-6cd0b4f0b6e3/1b8a09e1-6041-40e1-b517-bab4517225b4"
-      (reference "D51") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D51") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/bdc0dacb-eb0d-4d14-a7f7-6cd0b4f0b6e3/06402ff8-82f3-449b-bacf-ab333301cfe0"
-      (reference "D52") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D52") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/8aa47305-b620-405c-af52-31b0a6bd340b/3e65517f-c6c4-401b-9aa3-2a815464aeab"
-      (reference "D53") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D53") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/8aa47305-b620-405c-af52-31b0a6bd340b/6a5a2c86-76d1-4e17-b350-234a1b3551a2"
-      (reference "D54") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D54") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/8aa47305-b620-405c-af52-31b0a6bd340b/3263614b-b226-4044-b65d-b4dc64138a6f"
-      (reference "D55") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D55") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/8aa47305-b620-405c-af52-31b0a6bd340b/bfca9a21-6e66-4536-959f-5948335307b8"
-      (reference "D56") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D56") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/8aa47305-b620-405c-af52-31b0a6bd340b/148ed067-3987-4cb9-8862-328e9fbcdb7d"
-      (reference "D57") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D57") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/8aa47305-b620-405c-af52-31b0a6bd340b/e5956185-de20-4baf-96bb-a0d0d57a5344"
-      (reference "D58") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D58") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/8aa47305-b620-405c-af52-31b0a6bd340b/34a34128-f9af-4de6-a2c7-03de26f807da"
-      (reference "D59") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D59") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/8aa47305-b620-405c-af52-31b0a6bd340b/a7eadd9f-63b6-4f67-bc65-9083314ef9c1"
-      (reference "D60") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D60") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/8aa47305-b620-405c-af52-31b0a6bd340b/d7f52c65-0053-4642-8340-04ad9daf58f4"
-      (reference "D61") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D61") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/8aa47305-b620-405c-af52-31b0a6bd340b/0ef2fc7c-bd88-49e4-be5c-9d50dee85f5b"
-      (reference "D62") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D62") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/8aa47305-b620-405c-af52-31b0a6bd340b/c0400e2b-f4b3-4fcc-983f-e9138f13ca12"
-      (reference "D63") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D63") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/8aa47305-b620-405c-af52-31b0a6bd340b/d686038c-4417-4b84-bf9f-053d7a91eec6"
-      (reference "D64") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D64") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/8aa47305-b620-405c-af52-31b0a6bd340b/940f74a2-f04f-4ce8-8d98-9ccb6260fc0e"
-      (reference "D65") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D65") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/8aa47305-b620-405c-af52-31b0a6bd340b/1b8a09e1-6041-40e1-b517-bab4517225b4"
-      (reference "D66") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D66") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/8aa47305-b620-405c-af52-31b0a6bd340b/06402ff8-82f3-449b-bacf-ab333301cfe0"
-      (reference "D67") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D67") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/6e01c56b-11ec-4a6e-be0b-2377fa1de37f/3e65517f-c6c4-401b-9aa3-2a815464aeab"
-      (reference "D68") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D68") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/6e01c56b-11ec-4a6e-be0b-2377fa1de37f/6a5a2c86-76d1-4e17-b350-234a1b3551a2"
-      (reference "D69") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D69") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/6e01c56b-11ec-4a6e-be0b-2377fa1de37f/3263614b-b226-4044-b65d-b4dc64138a6f"
-      (reference "D70") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D70") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/6e01c56b-11ec-4a6e-be0b-2377fa1de37f/bfca9a21-6e66-4536-959f-5948335307b8"
-      (reference "D71") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D71") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/6e01c56b-11ec-4a6e-be0b-2377fa1de37f/148ed067-3987-4cb9-8862-328e9fbcdb7d"
-      (reference "D72") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D72") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/6e01c56b-11ec-4a6e-be0b-2377fa1de37f/e5956185-de20-4baf-96bb-a0d0d57a5344"
-      (reference "D73") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D73") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/6e01c56b-11ec-4a6e-be0b-2377fa1de37f/34a34128-f9af-4de6-a2c7-03de26f807da"
-      (reference "D74") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D74") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/6e01c56b-11ec-4a6e-be0b-2377fa1de37f/a7eadd9f-63b6-4f67-bc65-9083314ef9c1"
-      (reference "D75") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D75") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/6e01c56b-11ec-4a6e-be0b-2377fa1de37f/d7f52c65-0053-4642-8340-04ad9daf58f4"
-      (reference "D76") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D76") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/6e01c56b-11ec-4a6e-be0b-2377fa1de37f/0ef2fc7c-bd88-49e4-be5c-9d50dee85f5b"
-      (reference "D77") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D77") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/6e01c56b-11ec-4a6e-be0b-2377fa1de37f/c0400e2b-f4b3-4fcc-983f-e9138f13ca12"
-      (reference "D78") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D78") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/6e01c56b-11ec-4a6e-be0b-2377fa1de37f/d686038c-4417-4b84-bf9f-053d7a91eec6"
-      (reference "D79") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D79") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/6e01c56b-11ec-4a6e-be0b-2377fa1de37f/940f74a2-f04f-4ce8-8d98-9ccb6260fc0e"
-      (reference "D80") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D80") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/6e01c56b-11ec-4a6e-be0b-2377fa1de37f/1b8a09e1-6041-40e1-b517-bab4517225b4"
-      (reference "D81") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D81") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/6e01c56b-11ec-4a6e-be0b-2377fa1de37f/06402ff8-82f3-449b-bacf-ab333301cfe0"
-      (reference "D82") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D82") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9896f18b-3bbc-455b-b08f-2c6cd94090dd/3e65517f-c6c4-401b-9aa3-2a815464aeab"
-      (reference "D83") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D83") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9896f18b-3bbc-455b-b08f-2c6cd94090dd/6a5a2c86-76d1-4e17-b350-234a1b3551a2"
-      (reference "D84") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D84") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9896f18b-3bbc-455b-b08f-2c6cd94090dd/3263614b-b226-4044-b65d-b4dc64138a6f"
-      (reference "D85") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D85") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9896f18b-3bbc-455b-b08f-2c6cd94090dd/bfca9a21-6e66-4536-959f-5948335307b8"
-      (reference "D86") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D86") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9896f18b-3bbc-455b-b08f-2c6cd94090dd/148ed067-3987-4cb9-8862-328e9fbcdb7d"
-      (reference "D87") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D87") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9896f18b-3bbc-455b-b08f-2c6cd94090dd/e5956185-de20-4baf-96bb-a0d0d57a5344"
-      (reference "D88") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D88") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9896f18b-3bbc-455b-b08f-2c6cd94090dd/34a34128-f9af-4de6-a2c7-03de26f807da"
-      (reference "D89") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D89") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9896f18b-3bbc-455b-b08f-2c6cd94090dd/a7eadd9f-63b6-4f67-bc65-9083314ef9c1"
-      (reference "D90") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D90") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9896f18b-3bbc-455b-b08f-2c6cd94090dd/d7f52c65-0053-4642-8340-04ad9daf58f4"
-      (reference "D91") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D91") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9896f18b-3bbc-455b-b08f-2c6cd94090dd/0ef2fc7c-bd88-49e4-be5c-9d50dee85f5b"
-      (reference "D92") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D92") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9896f18b-3bbc-455b-b08f-2c6cd94090dd/c0400e2b-f4b3-4fcc-983f-e9138f13ca12"
-      (reference "D93") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D93") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9896f18b-3bbc-455b-b08f-2c6cd94090dd/d686038c-4417-4b84-bf9f-053d7a91eec6"
-      (reference "D94") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D94") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9896f18b-3bbc-455b-b08f-2c6cd94090dd/940f74a2-f04f-4ce8-8d98-9ccb6260fc0e"
-      (reference "D95") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D95") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9896f18b-3bbc-455b-b08f-2c6cd94090dd/1b8a09e1-6041-40e1-b517-bab4517225b4"
-      (reference "D96") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D96") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9896f18b-3bbc-455b-b08f-2c6cd94090dd/06402ff8-82f3-449b-bacf-ab333301cfe0"
-      (reference "D97") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D97") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9a036d87-ce07-4c99-be1b-db19c347f60b/3e65517f-c6c4-401b-9aa3-2a815464aeab"
-      (reference "D98") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D98") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9a036d87-ce07-4c99-be1b-db19c347f60b/6a5a2c86-76d1-4e17-b350-234a1b3551a2"
-      (reference "D99") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D99") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9a036d87-ce07-4c99-be1b-db19c347f60b/3263614b-b226-4044-b65d-b4dc64138a6f"
-      (reference "D100") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D100") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9a036d87-ce07-4c99-be1b-db19c347f60b/bfca9a21-6e66-4536-959f-5948335307b8"
-      (reference "D101") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D101") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9a036d87-ce07-4c99-be1b-db19c347f60b/148ed067-3987-4cb9-8862-328e9fbcdb7d"
-      (reference "D102") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D102") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9a036d87-ce07-4c99-be1b-db19c347f60b/e5956185-de20-4baf-96bb-a0d0d57a5344"
-      (reference "D103") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D103") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9a036d87-ce07-4c99-be1b-db19c347f60b/34a34128-f9af-4de6-a2c7-03de26f807da"
-      (reference "D104") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D104") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9a036d87-ce07-4c99-be1b-db19c347f60b/a7eadd9f-63b6-4f67-bc65-9083314ef9c1"
-      (reference "D105") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D105") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9a036d87-ce07-4c99-be1b-db19c347f60b/d7f52c65-0053-4642-8340-04ad9daf58f4"
-      (reference "D106") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D106") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9a036d87-ce07-4c99-be1b-db19c347f60b/0ef2fc7c-bd88-49e4-be5c-9d50dee85f5b"
-      (reference "D107") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D107") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9a036d87-ce07-4c99-be1b-db19c347f60b/c0400e2b-f4b3-4fcc-983f-e9138f13ca12"
-      (reference "D108") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D108") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9a036d87-ce07-4c99-be1b-db19c347f60b/d686038c-4417-4b84-bf9f-053d7a91eec6"
-      (reference "D109") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D109") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9a036d87-ce07-4c99-be1b-db19c347f60b/940f74a2-f04f-4ce8-8d98-9ccb6260fc0e"
-      (reference "D110") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D110") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9a036d87-ce07-4c99-be1b-db19c347f60b/1b8a09e1-6041-40e1-b517-bab4517225b4"
-      (reference "D111") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D111") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/9a036d87-ce07-4c99-be1b-db19c347f60b/06402ff8-82f3-449b-bacf-ab333301cfe0"
-      (reference "D112") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D112") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab/3e65517f-c6c4-401b-9aa3-2a815464aeab"
-      (reference "D113") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D113") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab/6a5a2c86-76d1-4e17-b350-234a1b3551a2"
-      (reference "D114") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D114") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab/3263614b-b226-4044-b65d-b4dc64138a6f"
-      (reference "D115") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D115") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab/bfca9a21-6e66-4536-959f-5948335307b8"
-      (reference "D116") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D116") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab/148ed067-3987-4cb9-8862-328e9fbcdb7d"
-      (reference "D117") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D117") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab/e5956185-de20-4baf-96bb-a0d0d57a5344"
-      (reference "D118") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D118") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab/34a34128-f9af-4de6-a2c7-03de26f807da"
-      (reference "D119") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D119") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab/a7eadd9f-63b6-4f67-bc65-9083314ef9c1"
-      (reference "D120") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D120") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab/d7f52c65-0053-4642-8340-04ad9daf58f4"
-      (reference "D121") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D121") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab/0ef2fc7c-bd88-49e4-be5c-9d50dee85f5b"
-      (reference "D122") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D122") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab/c0400e2b-f4b3-4fcc-983f-e9138f13ca12"
-      (reference "D123") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D123") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab/d686038c-4417-4b84-bf9f-053d7a91eec6"
-      (reference "D124") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D124") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab/940f74a2-f04f-4ce8-8d98-9ccb6260fc0e"
-      (reference "D125") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D125") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab/1b8a09e1-6041-40e1-b517-bab4517225b4"
-      (reference "D126") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D126") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab/06402ff8-82f3-449b-bacf-ab333301cfe0"
-      (reference "D127") (unit 1) (value "WS2812B") (footprint "LED_SMD:LED_Kingbright_AAA3528ESGCT")
+      (reference "D127") (unit 1) (value "WS2812B") (footprint "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B")
     )
     (path "/785c2b5b-0f6e-472e-8e4b-b02b70d5cf35/f73c095e-19b5-4ca2-82b2-71d1369b65a4/76c55874-9a4e-4802-bedb-581098bed0c9"
       (reference "D128") (unit 1) (value "SSB43L") (footprint "Diode_SMD:D_SMB")
