@@ -33,9 +33,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 0.762,
-          "height": 1.524,
-          "width": 1.524
+          "drill": 3.5,
+          "height": 7.0,
+          "width": 7.0
         },
         "silk_line_width": 0.15,
         "silk_text_italic": false,
@@ -45,7 +45,7 @@
         "silk_text_upright": false,
         "zones": {
           "45_degree_only": false,
-          "min_clearance": 0.0
+          "min_clearance": 0.254
         }
       },
       "diff_pair_dimensions": [
@@ -359,7 +359,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "STM32F103_Reference.kicad_pro",
+    "filename": "PCB.kicad_pro",
     "version": 1
   },
   "net_settings": {
@@ -392,11 +392,11 @@
         "microvia_drill": 0.1,
         "name": "Power",
         "nets": [
+          "+12V",
           "+3.3VA",
           "+3V3",
-          "/VBUS",
-          "GND",
-          "VCC"
+          "+5V",
+          "GND"
         ],
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
@@ -416,34 +416,45 @@
         "microvia_drill": 0.1,
         "name": "Signal",
         "nets": [
-          "/BOOT0",
-          "/CAN+",
-          "/CAN-",
-          "/HSE_IN",
-          "/HSE_OUT",
-          "/LED_STAT",
-          "/NRST",
+          "/IO/BTN_0_PIN",
+          "/IO/BTN_1_PIN",
+          "/IO/BTN_2_PIN",
+          "/IO/BTN_3_PIN",
+          "/IO/BTN_4_PIN",
+          "/IO/BTN_5_PIN",
+          "/IO/DIAL0_PIN",
+          "/IO/DIAL1_PIN",
+          "/IO/DIAL2_PIN",
+          "/IO/DIAL3_PIN",
+          "/IO/DIAL4_PIN",
+          "/IO/DIAL5_PIN",
+          "/IO/DIAL6_PIN",
+          "/IO/DIAL7_PIN",
+          "/IO/DIAL8_PIN",
+          "/IO/DIAL9_PIN",
+          "/Microcontroller/HSE_IN",
+          "/Microcontroller/HSE_OUT",
+          "BTN0",
+          "BTN1",
+          "BTN2",
+          "BTN3",
+          "BTN4",
+          "BTN5",
           "CANRX",
           "CANTX",
-          "Net-(D1-Pad1)",
-          "Net-(D2-Pad1)",
-          "Net-(J2-PadA5)",
-          "Net-(J2-PadB5)",
-          "Net-(JP1-Pad2)",
+          "DIAL0",
+          "DIAL1",
+          "DIAL2",
+          "DIAL3",
+          "DIAL4",
+          "DIAL5",
+          "DIAL6",
+          "DIAL7",
+          "DIAL8",
+          "DIAL9",
           "SWCLK",
           "SWDIO",
-          "SWO",
-          "USB_D+",
-          "USB_D-",
-          "unconnected-(J2-PadA8)",
-          "unconnected-(J2-PadB8)",
-          "unconnected-(J2-PadS1)",
-          "unconnected-(J4-Pad3)",
-          "unconnected-(U1-Pad5)",
-          "unconnected-(U3-Pad25)",
-          "unconnected-(U3-Pad26)",
-          "unconnected-(U3-Pad27)",
-          "unconnected-(U3-Pad28)"
+          "SWO"
         ],
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
@@ -511,6 +522,62 @@
     [
       "68f34db6-b185-48e2-8817-fb07f7d1240e",
       ""
+    ],
+    [
+      "785c2b5b-0f6e-472e-8e4b-b02b70d5cf35",
+      "Power supply"
+    ],
+    [
+      "339b743c-6ece-4c09-bcfc-fa4dc50d1069",
+      "Microcontroller"
+    ],
+    [
+      "99721f81-930a-4c83-8251-35b9148e6cee",
+      "Tachometer"
+    ],
+    [
+      "5ad5ec5b-c9b4-4423-954d-24d16ed8fc84",
+      "IO"
+    ],
+    [
+      "c2620eae-eace-4cc3-85c7-9b52b66bfb25",
+      "WS2812"
+    ],
+    [
+      "ccd2db12-79dd-4cb3-828d-c3b37e403a0b",
+      "Shift Lights"
+    ],
+    [
+      "bdc0dacb-eb0d-4d14-a7f7-6cd0b4f0b6e3",
+      "Digit 1"
+    ],
+    [
+      "8aa47305-b620-405c-af52-31b0a6bd340b",
+      "Digit 0"
+    ],
+    [
+      "6e01c56b-11ec-4a6e-be0b-2377fa1de37f",
+      "Digit 2"
+    ],
+    [
+      "9896f18b-3bbc-455b-b08f-2c6cd94090dd",
+      "Digit 3"
+    ],
+    [
+      "9a036d87-ce07-4c99-be1b-db19c347f60b",
+      "Digit 4"
+    ],
+    [
+      "4df892e7-ad06-4575-bd9f-6af6e3df74ab",
+      "Digit 5"
+    ],
+    [
+      "f73c095e-19b5-4ca2-82b2-71d1369b65a4",
+      "5V 3A Buck Regulator"
+    ],
+    [
+      "bb437566-7d32-450d-b77e-65f68738184c",
+      "5V 3A Ext Buck Regulator"
     ]
   ],
   "text_variables": {}

@@ -1,0 +1,5 @@
+(fp_lib_table
+  (lib (name "DTM_Headers")(type "KiCad")(uri "${KIPRJMOD}/kicad-libraries/DTM_Headers")(options "")(descr ""))
+  (lib (name "JST_B24B_PADSS")(type "KiCad")(uri "${KIPRJMOD}/kicad-libraries/JST_B24B_PADSS.pretty")(options "")(descr ""))
+  (lib (name "XL-3528RGBW-WS2812B")(type "KiCad")(uri "${KIPRJMOD}/kicad-libraries/XL-3528RGBW-WS2812B.pretty")(options "")(descr ""))
+)
