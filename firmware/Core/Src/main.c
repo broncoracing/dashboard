@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "ws2812.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -41,16 +41,15 @@
 /* Private variables ---------------------------------------------------------*/
 CAN_HandleTypeDef hcan;
 
-SPI_HandleTypeDef hspi1;
-
 /* USER CODE BEGIN PV */
+
+union color_t colors[16];
 
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-static void MX_SPI1_Init(void);
 static void MX_CAN_Init(void);
 /* USER CODE BEGIN PFP */
 
@@ -92,6 +91,10 @@ struct __attribute__((__packed__)) SegmentData {
 enum DigitPosition {
   D_0=0,
   D_1=1,
+  D_2=2,
+  D_3=3,
+  D_4=4,
+  D_5=5
 };
 
 struct CarState {
@@ -128,23 +131,6 @@ void write_int(uint32_t value, enum DigitPosition startDigit, uint8_t length) {
   }
 }
 
-// Write a floating point value to the display
-void write_float(float value, enum DigitPosition startDigit, uint8_t left, uint8_t right) {
-
-}
-
-void clear_display(void) {
-  for(uint8_t i = 0; i < sizeof(segment_data.digits) / sizeof(segment_data.digits[0]); ++i) {
-    segment_data.digits[i] = 0;
-  }
-  segment_data.alpha = 0;
-}
-
-void update_digits(void) {
-  HAL_GPIO_WritePin(RCLK_GPIO_Port, RCLK_Pin, GPIO_PIN_RESET);
-  HAL_SPI_Transmit(&hspi1, (uint8_t*) &segment_data, sizeof(segment_data), 10);
-  HAL_GPIO_WritePin(RCLK_GPIO_Port, RCLK_Pin, GPIO_PIN_SET);
-}
 
 void can_irq(CAN_HandleTypeDef *pcan) {
   CAN_RxHeaderTypeDef msg;
@@ -159,7 +145,7 @@ void can_irq(CAN_HandleTypeDef *pcan) {
         break;
       
       default:
-        carState.rpm = msg.StdId; // For testing
+        // carState.rpm = msg.StdId; // For testing
         break;
       }
   }
@@ -176,7 +162,7 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
   // relocate vector table to work with bootloader
-	SCB->VTOR = (uint32_t)0x08003000;
+	// SCB->VTOR = (uint32_t)0x08003000;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -197,10 +183,12 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_SPI1_Init();
   MX_CAN_Init();
   /* USER CODE BEGIN 2 */
 
+  union color_t red = {.color={.r=255, .g=150, .b=150}};
+  union color_t green = {.color={.g=255, .r = 150, .b=150}};
+  union color_t blue = {.color={.b=255, .g=150,.r=150}};
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -209,13 +197,29 @@ int main(void)
   {
     HAL_Delay(100); // ~100Hz Loop (Could be better by using systick)
     // TODO Watchdog timer
-    
-    // Toggle status LED
-    HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-
-    write_int(carState.rpm, D_0, 2);
-    update_digits();
-
+    union color_t old_red = red;
+    red = green;
+    green = blue;
+    blue = old_red;
+    colors[0] = red;
+    colors[1] = green;
+    colors[2] = blue;
+    colors[3] = red;
+    colors[4] = green;
+    colors[5] = blue; 
+    colors[6] = red;
+    colors[7] = green;
+    colors[8] = red;
+    colors[9] = green;
+    colors[10] = blue;
+    colors[11] = red;
+    colors[12] = green;
+    colors[13] = blue; 
+    colors[14] = red;
+    colors[15] = green;
+    // light up LED strip
+    write_strip(colors, 16, LED_0_GPIO_Port, LED_3_Pin|LED_2_Pin|LED_1_Pin|LED_0_Pin);
+    write_strip(colors, 16, LED_4_GPIO_Port, LED_7_Pin|LED_6_Pin|LED_5_Pin|LED_4_Pin);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -286,7 +290,7 @@ static void MX_CAN_Init(void)
   hcan.Init.TimeTriggeredMode = DISABLE;
   hcan.Init.AutoBusOff = DISABLE;
   hcan.Init.AutoWakeUp = DISABLE;
-  hcan.Init.AutoRetransmission = DISABLE;
+  hcan.Init.AutoRetransmission = ENABLE;
   hcan.Init.ReceiveFifoLocked = DISABLE;
   hcan.Init.TransmitFifoPriority = DISABLE;
   if (HAL_CAN_Init(&hcan) != HAL_OK)
@@ -325,44 +329,6 @@ static void MX_CAN_Init(void)
 }
 
 /**
-  * @brief SPI1 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_SPI1_Init(void)
-{
-
-  /* USER CODE BEGIN SPI1_Init 0 */
-
-  /* USER CODE END SPI1_Init 0 */
-
-  /* USER CODE BEGIN SPI1_Init 1 */
-
-  /* USER CODE END SPI1_Init 1 */
-  /* SPI1 parameter configuration*/
-  hspi1.Instance = SPI1;
-  hspi1.Init.Mode = SPI_MODE_MASTER;
-  hspi1.Init.Direction = SPI_DIRECTION_2LINES;
-  hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
-  hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
-  hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
-  hspi1.Init.NSS = SPI_NSS_SOFT;
-  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;
-  hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
-  hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
-  hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
-  hspi1.Init.CRCPolynomial = 10;
-  if (HAL_SPI_Init(&hspi1) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN SPI1_Init 2 */
-
-  /* USER CODE END SPI1_Init 2 */
-
-}
-
-/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -377,14 +343,24 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LED_Pin|RCLK_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, LED_7_Pin|LED_6_Pin|LED_5_Pin|LED_4_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : LED_Pin RCLK_Pin */
-  GPIO_InitStruct.Pin = LED_Pin|RCLK_Pin;
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, LED_3_Pin|LED_2_Pin|LED_1_Pin|LED_0_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : LED_7_Pin LED_6_Pin LED_5_Pin LED_4_Pin */
+  GPIO_InitStruct.Pin = LED_7_Pin|LED_6_Pin|LED_5_Pin|LED_4_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : LED_3_Pin LED_2_Pin LED_1_Pin LED_0_Pin */
+  GPIO_InitStruct.Pin = LED_3_Pin|LED_2_Pin|LED_1_Pin|LED_0_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 }
 
