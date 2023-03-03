@@ -83,6 +83,7 @@ void write_tach(uint8_t start, uint8_t length, union color_t color);
 void write_status(uint8_t idx, union color_t color);
 
 void write_int(uint32_t value, enum DigitPosition startDigit, uint8_t length, union color_t color);
+void write_fixedpoint(uint32_t value, enum DigitPosition startDigit, uint8_t length, uint8_t decimals, union color_t color);
 
 void wipe_display(void);
 

@@ -228,6 +228,22 @@ void write_int(uint32_t value, enum DigitPosition startDigit, uint8_t length, un
   }
 }
 
+void write_fixedpoint(uint32_t value, enum DigitPosition startDigit, uint8_t length, uint8_t decimals, union color_t color){
+  if(startDigit + length > MAX_DIGIT + 1) {
+    // Invalid size to write
+    Error_Handler();
+    return;
+  }
+  for(int8_t i = length - 1; i >= 0; --i) {
+    uint8_t digit_val = value % 10;
+    write_digit(digit_val, startDigit + i, 0, color);
+    value = value / 10;
+    if(value == 0 && i < length - decimals) break;
+  }
+  // write dp
+  write_char(0b00000000, startDigit + length - decimals - 1, 1, color);
+}
+
 void startup_animation(void) {
 }
 

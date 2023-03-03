@@ -38,11 +38,27 @@ extern "C" {
 /* USER CODE BEGIN ET */
 
 struct CarState {
-  uint32_t rpm;
-  uint32_t temp;
-  uint8_t gear;
+  // Things from ECU
+  uint16_t rpm;
+  uint16_t lambda;
+  
+  uint16_t oil_temp;
+  uint16_t water_temp;
+  
+  uint16_t battery_voltage;
+  uint8_t gear_position;
+  uint8_t speedometer;
 
+  uint8_t apps;
+  uint8_t tps;
+  uint16_t bse_front;
+  uint16_t bse_rear;
+
+  // Things read from dash
   uint8_t dial_pos[2];
+
+  // CAN Timeout
+  uint32_t last_message_tick; // Warning - will overflow if left running for a few months!
 };
 extern struct CarState carState;
 
@@ -56,7 +72,8 @@ extern struct CarState carState;
 
 /* Exported macro ------------------------------------------------------------*/
 /* USER CODE BEGIN EM */
-
+#define CAN0_PERIOD_MS 100
+#define CAN1_PERIOD_MS 100
 /* USER CODE END EM */
 
 /* Exported functions prototypes ---------------------------------------------*/

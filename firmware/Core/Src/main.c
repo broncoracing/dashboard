@@ -25,6 +25,8 @@
 #include "display.h"
 #include "auto_brightness.h"
 #include "dial.h"
+
+#include "can-ids/CAN.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -67,6 +69,8 @@ static void MX_ADC1_Init(void);
 
 
 void can_irq(CAN_HandleTypeDef *pcan) {
+  carState.last_message_tick = HAL_GetTick();
+
   CAN_RxHeaderTypeDef msg;
   uint8_t data[8];
   HAL_CAN_GetRxMessage(pcan, CAN_RX_FIFO0, &msg, data);
@@ -74,10 +78,25 @@ void can_irq(CAN_HandleTypeDef *pcan) {
   if(msg.IDE == CAN_ID_STD) { // Standard CAN ID
     switch (msg.StdId)
       {
-      case 0xB0:
+      case BOOTLOADER_ID:
         __NVIC_SystemReset(); // Reset to bootloader
         break;
-      
+      case ECU_1_ID:
+
+        break;
+      case ECU_2_ID:
+
+        break;
+      case ECU_3_ID:
+        carState.battery_voltage = read_field_u16(&ECU_3_battery_voltage, data);
+        break;
+      case ECU_4_ID:
+
+        break;
+      case ECU_DBW_ID:
+
+        break;
+
       default:
         // carState.rpm = msg.StdId; // For testing
         break;
@@ -183,14 +202,28 @@ int main(void)
 
     write_digit(carState.dial_pos[0], DIGIT_0, 1, COLOR_RED);
 
-    write_int(adc_buffer[adc_buffer_idx][0], DIGIT_2, 4, COLOR_YELLOW);
+    // write_int(adc_buffer[adc_buffer_idx][0], DIGIT_2, 4, COLOR_YELLOW);
+
+    // write voltage
+    uint32_t voltage = carState.battery_voltage;
+    union color_t voltage_color;
+    if(voltage < 10 * ECU_3_battery_voltage.divisor){
+      voltage_color = flash(COLOR_RED, 250, 125);
+    } else if(voltage < 11 * ECU_3_battery_voltage.divisor){
+      voltage_color = COLOR_ORANGE;
+    } else if(voltage < 12 * ECU_3_battery_voltage.divisor){
+      voltage_color = COLOR_YELLOW;
+    } else {
+      voltage_color = COLOR_GREEN;
+    }
+    write_fixedpoint(voltage, DIGIT_2, 4, 2, voltage_color);
     
     write_shift_lights(0, 4, COLOR_GREEN);
     write_shift_lights(4, 4, COLOR_YELLOW);
     write_shift_lights(8, 4, COLOR_ORANGE);
     write_tach(0, 4, COLOR_RED);
     write_status(3, COLOR_ORANGE);
-    write_status(4, flash(COLOR_RED, 500, 250));
+    write_status(4, voltage_color);
     write_status(7, COLOR_BLUE);
 
     update_display();
@@ -419,12 +452,21 @@ static void MX_CAN_Init(void)
   /* USER CODE BEGIN CAN_Init 2 */
   // Accept all CAN messages
   CAN_FilterTypeDef sf;
-  sf.FilterMaskIdHigh = 0x0000;
-  sf.FilterMaskIdLow = 0x0000;
+
+  // First filter - ECU messages
+  sf.FilterMaskIdHigh = 0x700 << 5; // Filter by top 3 bits
+  sf.FilterIdHigh = ECU_1_ID << 5;
+
+  // Second filter - Bootloader requests
+  sf.FilterMaskIdLow = 0x7FF << 5;
+  sf.FilterIdLow = BOOTLOADER_ID;
+
+  // Filters into CAN FIFO 0
   sf.FilterFIFOAssignment = CAN_FILTER_FIFO0;
+  // Filter settings
   sf.FilterBank = 0;
-  sf.FilterMode = CAN_FILTERMODE_IDMASK;
-  sf.FilterScale = CAN_FILTERSCALE_32BIT;
+  sf.FilterMode = CAN_FILTERMODE_IDMASK; // ID/Mask mode (rather than ID list)
+  sf.FilterScale = CAN_FILTERSCALE_16BIT; // two 16 bit filters
   sf.FilterActivation = CAN_FILTER_ENABLE;
 
   if (HAL_CAN_ConfigFilter(&hcan, &sf) != HAL_OK) {
