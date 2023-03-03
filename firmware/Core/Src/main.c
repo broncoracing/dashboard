@@ -22,6 +22,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "ws2812.h"
+#include "display.h"
+#include "auto_brightness.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -39,97 +41,34 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+ADC_HandleTypeDef hadc1;
+DMA_HandleTypeDef hdma_adc1;
+
 CAN_HandleTypeDef hcan;
 
 /* USER CODE BEGIN PV */
-
-union color_t colors[16];
 
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_DMA_Init(void);
 static void MX_CAN_Init(void);
+static void MX_ADC1_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-const uint8_t digit_lookup_table[16] = {
-  0b00111111, // 0
-  0b00000110, // 1
-  0b01011011, // 2
-  0b01001111, // 3
-  0b01100110, // 4
-  0b01101101, // 5
-  0b01111101, // 6
-  0b00000111, // 7
-  0b01111111, // 8
-  0b01101111, // 9
-  0b01110111, // A
-  0b01111100, // b
-  0b00111001, // c
-  0b01011110, // d
-  0b01111001, // E
-  0b01110001, // f
-};
 
-enum Char7Seg {
-  b_7SEG=0b01111100,
-  r_7SEG=0x01010000,
-};
-
-const uint8_t digit_dp = 0b10000000;
-
-struct __attribute__((__packed__)) SegmentData {
-  uint16_t alpha;
-  uint8_t digits[2];
-} segment_data;
-
-enum DigitPosition {
-  D_0=0,
-  D_1=1,
-  D_2=2,
-  D_3=3,
-  D_4=4,
-  D_5=5
-};
 
 struct CarState {
   uint32_t rpm;
   float temp;
 } carState;
 
-uint32_t num_to_display = 0;
-
-void write_digit(uint8_t value, enum DigitPosition digit, uint8_t dp) {
-  if(value < sizeof(digit_lookup_table)/sizeof(digit_lookup_table[0])) {
-    // Digit is valid
-    // Read lookup table and set
-    segment_data.digits[digit] = digit_lookup_table[value];
-  } else {
-    // Invalid digit, turn off
-    segment_data.digits[digit] = 0x00; 
-  }
-  if(dp) {
-    segment_data.digits[digit] |= digit_dp;
-  }
-}
-
-void write_int(uint32_t value, enum DigitPosition startDigit, uint8_t length) {
-  if(startDigit + length > sizeof(segment_data.digits) / sizeof(segment_data.digits[0])) {
-    // Invalid size to write
-    Error_Handler();
-    return;
-  }
-  for(uint8_t i = 0; i < length; ++i) {
-    uint8_t digit_val = value % 10;
-    write_digit(digit_val, startDigit + i, 0);
-    value = value / 10;
-  }
-}
 
 
 void can_irq(CAN_HandleTypeDef *pcan) {
@@ -148,9 +87,36 @@ void can_irq(CAN_HandleTypeDef *pcan) {
         // carState.rpm = msg.StdId; // For testing
         break;
       }
-  }
-  
+  } 
 }
+
+uint8_t rainbow_offset = 0;
+union color_t rainbow(struct xy_t coord){
+  return hsv((coord.x + coord.y) * 3 + rainbow_offset, 255, 2);
+}
+
+union color_t full_blast(struct xy_t coord){
+  union color_t col = {.color={.r=255,.g=255,.b=255}};
+  return col;
+}
+
+int32_t wipe_var;
+#define MAX(x, y) (((x) > (y)) ? (x) : (y))
+#define MIN(x, y) (((x) < (y)) ? (x) : (y))
+union color_t gold_wipe(struct xy_t coord){
+  int32_t cx = coord.x - 67;
+  int32_t cy = coord.y - 10;
+
+  int32_t dist = sqrt(cx * cx + cy * cy);
+
+  int32_t brightness = MAX(MIN((wipe_var - dist) * 2, 40), 0);
+  return gamma(hsv(20, 255, brightness));
+}
+
+volatile uint16_t adc_buffer[2][11];
+volatile uint8_t adc_buffer_idx = 0;
+volatile uint8_t adc_ready = 1;
+
 
 /* USER CODE END 0 */
 
@@ -183,43 +149,55 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_CAN_Init();
+  MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
 
-  union color_t red = {.color={.r=255, .g=150, .b=150}};
-  union color_t green = {.color={.g=255, .r = 150, .b=150}};
-  union color_t blue = {.color={.b=255, .g=150,.r=150}};
+  HAL_ADCEx_Calibration_Start(&hadc1);
+
+  startup_animation();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    HAL_Delay(100); // ~100Hz Loop (Could be better by using systick)
+    // Start ADC
+    if(adc_ready){
+      uint8_t new_idx = (adc_buffer_idx + 1) % 2;
+      HAL_ADC_Start_DMA(&hadc1, (uint32_t *) adc_buffer[new_idx], 11);
+      adc_ready = 0;
+    }
+
+    HAL_Delay(10); // ~100Hz Loop (Not even remotely precise, but it doesn't matter as long as it's fast enough)
     // TODO Watchdog timer
-    union color_t old_red = red;
-    red = green;
-    green = blue;
-    blue = old_red;
-    colors[0] = red;
-    colors[1] = green;
-    colors[2] = blue;
-    colors[3] = red;
-    colors[4] = green;
-    colors[5] = blue; 
-    colors[6] = red;
-    colors[7] = green;
-    colors[8] = red;
-    colors[9] = green;
-    colors[10] = blue;
-    colors[11] = red;
-    colors[12] = green;
-    colors[13] = blue; 
-    colors[14] = red;
-    colors[15] = green;
-    // light up LED strip
-    write_strip(colors, 16, LED_0_GPIO_Port, LED_3_Pin|LED_2_Pin|LED_1_Pin|LED_0_Pin);
-    write_strip(colors, 16, LED_4_GPIO_Port, LED_7_Pin|LED_6_Pin|LED_5_Pin|LED_4_Pin);
+
+    // Update brightness
+    update_brightness(adc_buffer[adc_buffer_idx][9]);
+
+    // light up LEDs
+    wipe_var = (wipe_var + 2) % 200;
+    rainbow_offset += 4;
+    // shade_display(&rainbow);
+    wipe_display();
+
+    uint32_t adc_idx = 9;//(HAL_GetTick() / 500) % 11;
+    uint8_t hue = adc_idx * 25;
+    write_digit(adc_idx, DIGIT_0, 1, COLOR_RED);
+
+    // write_int(adc_buffer[adc_buffer_idx][adc_idx], DIGIT_2, 4, COLOR_GOLD);
+    write_int(brightness, DIGIT_3, 3, COLOR_WHITE);
+    
+    write_shift_lights(0, 4, COLOR_GREEN);
+    write_shift_lights(4, 4, COLOR_YELLOW);
+    write_shift_lights(8, 4, COLOR_ORANGE);
+    write_tach(0, 4, COLOR_RED);
+    write_status(3, COLOR_ORANGE);
+    write_status(4, flash(COLOR_RED, 500, 250));
+    write_status(7, COLOR_BLUE);
+
+    update_display();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -235,6 +213,7 @@ void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
@@ -264,6 +243,150 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC;
+  PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV6;
+  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+  {
+    Error_Handler();
+  }
+}
+
+/**
+  * @brief ADC1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_ADC1_Init(void)
+{
+
+  /* USER CODE BEGIN ADC1_Init 0 */
+
+  /* USER CODE END ADC1_Init 0 */
+
+  ADC_ChannelConfTypeDef sConfig = {0};
+
+  /* USER CODE BEGIN ADC1_Init 1 */
+
+  /* USER CODE END ADC1_Init 1 */
+
+  /** Common config
+  */
+  hadc1.Instance = ADC1;
+  hadc1.Init.ScanConvMode = ADC_SCAN_ENABLE;
+  hadc1.Init.ContinuousConvMode = DISABLE;
+  hadc1.Init.DiscontinuousConvMode = DISABLE;
+  hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
+  hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
+  hadc1.Init.NbrOfConversion = 11;
+  if (HAL_ADC_Init(&hadc1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Channel = ADC_CHANNEL_0;
+  sConfig.Rank = ADC_REGULAR_RANK_1;
+  sConfig.SamplingTime = ADC_SAMPLETIME_71CYCLES_5;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Channel = ADC_CHANNEL_1;
+  sConfig.Rank = ADC_REGULAR_RANK_2;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Channel = ADC_CHANNEL_2;
+  sConfig.Rank = ADC_REGULAR_RANK_3;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Channel = ADC_CHANNEL_3;
+  sConfig.Rank = ADC_REGULAR_RANK_4;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Channel = ADC_CHANNEL_4;
+  sConfig.Rank = ADC_REGULAR_RANK_5;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Channel = ADC_CHANNEL_5;
+  sConfig.Rank = ADC_REGULAR_RANK_6;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Channel = ADC_CHANNEL_6;
+  sConfig.Rank = ADC_REGULAR_RANK_7;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Channel = ADC_CHANNEL_7;
+  sConfig.Rank = ADC_REGULAR_RANK_8;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Channel = ADC_CHANNEL_8;
+  sConfig.Rank = ADC_REGULAR_RANK_9;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Channel = ADC_CHANNEL_9;
+  sConfig.Rank = ADC_REGULAR_RANK_10;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Channel = ADC_CHANNEL_TEMPSENSOR;
+  sConfig.Rank = ADC_REGULAR_RANK_11;
+  sConfig.SamplingTime = ADC_SAMPLETIME_239CYCLES_5;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN ADC1_Init 2 */
+
+  /* USER CODE END ADC1_Init 2 */
+
 }
 
 /**
@@ -329,6 +452,22 @@ static void MX_CAN_Init(void)
 }
 
 /**
+  * Enable DMA controller clock
+  */
+static void MX_DMA_Init(void)
+{
+
+  /* DMA controller clock enable */
+  __HAL_RCC_DMA1_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  /* DMA1_Channel1_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Channel1_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Channel1_IRQn);
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -348,6 +487,20 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, LED_3_Pin|LED_2_Pin|LED_1_Pin|LED_0_Pin, GPIO_PIN_RESET);
 
+  /*Configure GPIO pins : BTN0_Pin BTN1_Pin BTN2_Pin BTN3_Pin
+                           BTN4_Pin */
+  GPIO_InitStruct.Pin = BTN0_Pin|BTN1_Pin|BTN2_Pin|BTN3_Pin
+                          |BTN4_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : BTN5_Pin */
+  GPIO_InitStruct.Pin = BTN5_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(BTN5_GPIO_Port, &GPIO_InitStruct);
+
   /*Configure GPIO pins : LED_7_Pin LED_6_Pin LED_5_Pin LED_4_Pin */
   GPIO_InitStruct.Pin = LED_7_Pin|LED_6_Pin|LED_5_Pin|LED_4_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -365,7 +518,11 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
+  /* This is called after the conversion is completed */
+  adc_buffer_idx = (adc_buffer_idx + 1) % 2;
+  adc_ready = 1;
+}
 /* USER CODE END 4 */
 
 /**
