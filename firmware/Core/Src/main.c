@@ -24,6 +24,7 @@
 #include "ws2812.h"
 #include "display.h"
 #include "auto_brightness.h"
+#include "dial.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -62,12 +63,6 @@ static void MX_ADC1_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
-
-struct CarState {
-  uint32_t rpm;
-  float temp;
-} carState;
 
 
 
@@ -117,6 +112,7 @@ volatile uint16_t adc_buffer[2][11];
 volatile uint8_t adc_buffer_idx = 0;
 volatile uint8_t adc_ready = 1;
 
+struct CarState carState;
 
 /* USER CODE END 0 */
 
@@ -176,18 +172,18 @@ int main(void)
     // Update brightness
     update_brightness(adc_buffer[adc_buffer_idx][9]);
 
+    // Update dial positions
+    update_dial_state(adc_buffer[adc_buffer_idx][0], adc_buffer[adc_buffer_idx][1]);    
+
     // light up LEDs
     wipe_var = (wipe_var + 2) % 200;
     rainbow_offset += 4;
     // shade_display(&rainbow);
     wipe_display();
 
-    uint32_t adc_idx = 9;//(HAL_GetTick() / 500) % 11;
-    uint8_t hue = adc_idx * 25;
-    write_digit(adc_idx, DIGIT_0, 1, COLOR_RED);
+    write_digit(carState.dial_pos[0], DIGIT_0, 1, COLOR_RED);
 
-    // write_int(adc_buffer[adc_buffer_idx][adc_idx], DIGIT_2, 4, COLOR_GOLD);
-    write_int(brightness, DIGIT_3, 3, COLOR_WHITE);
+    write_int(adc_buffer[adc_buffer_idx][0], DIGIT_2, 4, COLOR_YELLOW);
     
     write_shift_lights(0, 4, COLOR_GREEN);
     write_shift_lights(4, 4, COLOR_YELLOW);

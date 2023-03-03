@@ -37,6 +37,16 @@ extern "C" {
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
 
+struct CarState {
+  uint32_t rpm;
+  uint32_t temp;
+  uint8_t gear;
+
+  uint8_t dial_pos[2];
+};
+extern struct CarState carState;
+
+
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/
