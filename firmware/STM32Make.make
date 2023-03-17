@@ -36,6 +36,7 @@ BUILD_DIR = build
 ######################################
 # C sources
 C_SOURCES =  \
+Core/Src/adc.c \
 Core/Src/auto_brightness.c \
 Core/Src/can-ids/CAN.c \
 Core/Src/can-ids/CAN_IDS.c \
@@ -45,6 +46,7 @@ Core/Src/main.c \
 Core/Src/stm32f1xx_hal_msp.c \
 Core/Src/stm32f1xx_it.c \
 Core/Src/system_stm32f1xx.c \
+Core/Src/ui.c \
 Core/Src/ws2812.c \
 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c \
 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c \

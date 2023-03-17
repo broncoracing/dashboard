@@ -72,8 +72,17 @@ extern struct CarState carState;
 
 /* Exported macro ------------------------------------------------------------*/
 /* USER CODE BEGIN EM */
+
+// Period for CAN0 frame (Dials, temperature, etc)
 #define CAN0_PERIOD_MS 100
-#define CAN1_PERIOD_MS 100
+
+// Period for CAN1 frame (Shifting, launch control, other buttons)
+#define CAN1_PERIOD_MS 10
+
+// Don't allow downshifts above this RPM
+#define MONEY_SHIFT_THRESHOLD 10200
+
+
 /* USER CODE END EM */
 
 /* Exported functions prototypes ---------------------------------------------*/

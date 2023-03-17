@@ -26,8 +26,8 @@
 
 #include "ws2812.h"
 #include "display.h"
-#include "auto_brightness.h"
 #include "dial.h"
+#include "ui.h"
 
 #include "can-ids/CAN.h"
 /* USER CODE END Includes */
@@ -59,9 +59,6 @@ DMA_HandleTypeDef hdma_tim2_ch2_ch4;
 
 /* USER CODE BEGIN PV */
 
-volatile uint16_t adc_buffer[2][11];
-volatile uint8_t adc_buffer_idx = 0;
-volatile uint8_t adc_ready = 1;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -133,12 +130,6 @@ struct CarState carState;
 
 
 
-void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
-  /* This is called after the conversion is completed */
-  adc_buffer_idx = (adc_buffer_idx + 1) % 2;
-  adc_ready = 1;
-}
-
 /* USER CODE END 0 */
 
 /**
@@ -185,21 +176,14 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    // Start ADC
-    if(adc_ready){
-      uint8_t new_idx = (adc_buffer_idx + 1) % 2;
-      HAL_ADC_Start_DMA(&hadc1, (uint32_t *) adc_buffer[new_idx], 11);
-      adc_ready = 0;
-    }
+    HAL_Delay(10); // Add some delay so we're not completely thrashing the mcu
 
-    HAL_Delay(10); // ~100Hz Loop (Not even remotely precise, but it doesn't matter as long as it's fast enough)
-
-
-    // Update brightness
-    update_brightness(adc_buffer[adc_buffer_idx][9]);
+    
+    // Update UI
+    update_ui();
 
     // Update dial positions
-    update_dial_state(adc_buffer[adc_buffer_idx][0], adc_buffer[adc_buffer_idx][1]);    
+    update_dial_state(adc_buffer[adc_buffer_idx][0], adc_buffer[adc_buffer_idx][1]);
 
     // TODO Watchdog timer
     

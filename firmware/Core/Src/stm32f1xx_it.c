@@ -189,6 +189,8 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
   /* USER CODE BEGIN SysTick_IRQn 0 */
+
+  // Send CAN messages at the pre-defined rates
   if(HAL_GetTick() % CAN0_PERIOD_MS == 0){
     CAN_TxHeaderTypeDef can0_hdr;
     can0_hdr.DLC = DASHBOARD_0_DLC;
@@ -209,6 +211,9 @@ void SysTick_Handler(void)
     can1_hdr.RTR = CAN_RTR_DATA;
     uint8_t data[8];
     uint32_t mailbox;
+
+    data[0] = 0;
+
     HAL_CAN_AddTxMessage(&hcan, &can1_hdr, data, mailbox);
   }
   
