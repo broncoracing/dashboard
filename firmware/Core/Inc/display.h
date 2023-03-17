@@ -47,7 +47,7 @@ union color_t flash(union color_t color, uint16_t period_ms, uint16_t length_ms)
 union color_t hsv(uint8_t h, uint8_t s, uint8_t v);
 
 // Gamma correction function
-union color_t gamma(union color_t color);
+union color_t gamma_color(union color_t color);
 
 uint16_t gamma_16(uint16_t val);
 
@@ -58,6 +58,7 @@ void shade_display(display_shader_t shader);
 enum Char7Seg {
   b_7SEG=0b01111100,
   r_7SEG=0x01010000,
+  dash_7SEG=0x01000000,
 };
 
 extern const uint8_t digit_dp;

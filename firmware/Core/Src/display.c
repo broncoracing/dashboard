@@ -6,8 +6,6 @@ union color_t display_frame_buffer[NUM_STRIPS][STRIP_LENGTH];
 
 uint8_t brightness = DEFAULT_BRIGHTNESS;
 
-const uint16_t group_1_pins[4] = {LED_0_Pin, LED_1_Pin, LED_2_Pin, LED_3_Pin};
-const uint16_t group_2_pins[4] = {LED_4_Pin, LED_5_Pin, LED_6_Pin, LED_7_Pin};
 
 #define DIGIT_XY(dx, dy) \
     {dx,dy},{dx-7,dy+11},{dx-11,dy+11},{dx-16,dy+19},{dx-16,dy+14},{dx-16,dy+8},{dx-16,dy+3},{dx-11,dy+1},{dx-7,dy+1},{dx-4,dy+3},{dx-4,dy+8},{dx-4,dy+14},{dx-4,dy+19},{dx-7,dy+22},{dx-11,dy+22},{0,0}
@@ -24,8 +22,7 @@ const struct xy_t pixel_pos[NUM_STRIPS][STRIP_LENGTH] = {
 };
 
 void update_display(void) {
-    write_strip_4x(display_frame_buffer, LED_0_GPIO_Port, group_1_pins);
-    write_strip_4x(display_frame_buffer[4], LED_4_GPIO_Port, group_2_pins);
+    write_strip_8x(display_frame_buffer);
 }
 
 // Set display to all zeros
@@ -125,7 +122,7 @@ const uint8_t gamma_lut[256] = {
    226, 228, 230, 232, 233, 235, 237, 239, 241, 243, 245, 247, 249, 251, 253, 255,
   };
 
-union color_t gamma(union color_t color){
+union color_t gamma_color(union color_t color){
     union color_t output = {.color={
         .r=gamma_lut[color.color.r],
         .g=gamma_lut[color.color.g],
@@ -244,7 +241,47 @@ void write_fixedpoint(uint32_t value, enum DigitPosition startDigit, uint8_t len
   write_char(0b00000000, startDigit + length - decimals - 1, 1, color);
 }
 
+// Wipe animation for startup
+int32_t wipe_var;
+#define MAX(x, y) (((x) > (y)) ? (x) : (y))
+#define MIN(x, y) (((x) < (y)) ? (x) : (y))
+union color_t gold_wipe(struct xy_t coord){
+  int32_t cx = coord.x - 67;
+  int32_t cy = coord.y - 10;
+
+  int32_t dist = sqrt(cx * cx + cy * cy);
+
+  int32_t anim_brightness = MAX(MIN((wipe_var - dist) * 2, 40), 0) * brightness / 256;
+  return hsv(13, 255, anim_brightness);
+}
+
 void startup_animation(void) {
+  wipe_var = 0;
+  brightness = 50;
+  // wipe in
+  for(uint32_t i = 0; i < 100; ++i) {
+    shade_display(gold_wipe);
+    wipe_var += 2;
+    write_char(b_7SEG, DIGIT_1, 1, COLOR_GOLD);
+    write_char(r_7SEG, DIGIT_1, 1, COLOR_GOLD);
+    write_char(dash_7SEG, DIGIT_1, 1, COLOR_GOLD);
+    write_char(digit_lookup_table[2], DIGIT_1, 1, COLOR_GOLD);
+    write_char(digit_lookup_table[3], DIGIT_1, 1, COLOR_GOLD);
+    HAL_Delay(5);
+  }
+  // fade out
+  for(uint32_t i = 0; i < 50; ++i) {
+    brightness = 50 - i;
+
+    shade_display(gold_wipe);
+    write_char(b_7SEG, DIGIT_1, 1, COLOR_GOLD);
+    write_char(r_7SEG, DIGIT_1, 1, COLOR_GOLD);
+    write_char(dash_7SEG, DIGIT_1, 1, COLOR_GOLD);
+    write_char(digit_lookup_table[2], DIGIT_1, 1, COLOR_GOLD);
+    write_char(digit_lookup_table[3], DIGIT_1, 1, COLOR_GOLD);
+    HAL_Delay(5);
+  }
+  brightness = DEFAULT_BRIGHTNESS;
 }
 
 
