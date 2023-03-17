@@ -178,6 +178,7 @@ int main(void)
   {
     HAL_Delay(10); // Add some delay so we're not completely thrashing the mcu
 
+
     
     // Update UI
     update_ui();
