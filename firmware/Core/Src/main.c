@@ -149,7 +149,7 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
   // relocate vector table to work with bootloader
-	// SCB->VTOR = (uint32_t)0x08003000;
+	SCB->VTOR = (uint32_t)0x08003000;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -467,7 +467,7 @@ static void MX_CAN_Init(void)
 
   // Second filter - Bootloader requests
   sf.FilterMaskIdLow = 0x7FF << 5;
-  sf.FilterIdLow = BOOTLOADER_ID;
+  sf.FilterIdLow = BOOTLOADER_ID << 5;
 
   // Filters into CAN FIFO 0
   sf.FilterFIFOAssignment = CAN_FILTER_FIFO0;
