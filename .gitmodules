@@ -1,3 +1,6 @@
 [submodule "pcb/kicad-libraries"]
 	path = pcb/kicad-libraries
 	url = git@github.com:broncoracing/kicad-libraries.git
+[submodule "firmware/Core/Src/can-ids"]
+	path = firmware/Core/Src/can-ids
+	url = git@github.com:broncoracing/can-ids.git

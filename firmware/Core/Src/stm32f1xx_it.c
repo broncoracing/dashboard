@@ -22,6 +22,9 @@
 #include "stm32f1xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+// #include "main.h"
+// #include "dial.h"
+#include "can-ids/CAN.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -55,9 +58,12 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
+extern DMA_HandleTypeDef hdma_adc1;
 extern CAN_HandleTypeDef hcan;
+extern DMA_HandleTypeDef hdma_tim2_up;
+extern DMA_HandleTypeDef hdma_tim2_ch1;
+extern DMA_HandleTypeDef hdma_tim2_ch2_ch4;
 /* USER CODE BEGIN EV */
-
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -183,7 +189,29 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
   /* USER CODE BEGIN SysTick_IRQn 0 */
-
+  if(HAL_GetTick() % CAN0_PERIOD_MS == 0){
+    CAN_TxHeaderTypeDef can0_hdr;
+    can0_hdr.DLC = DASHBOARD_0_DLC;
+    can0_hdr.IDE = CAN_ID_STD;
+    can0_hdr.StdId = DASHBOARD_0_ID;
+    can0_hdr.RTR = CAN_RTR_DATA;
+    uint8_t data[8];
+    data[0] = carState.dial_pos[0];
+    data[1] = carState.dial_pos[1];
+    uint32_t mailbox;
+    HAL_CAN_AddTxMessage(&hcan, &can0_hdr, data, mailbox);
+  }
+  if(HAL_GetTick() % CAN1_PERIOD_MS == 0){
+    CAN_TxHeaderTypeDef can1_hdr;
+    can1_hdr.DLC = DASHBOARD_1_DLC;
+    can1_hdr.IDE = CAN_ID_STD;
+    can1_hdr.StdId = DASHBOARD_1_ID;
+    can1_hdr.RTR = CAN_RTR_DATA;
+    uint8_t data[8];
+    uint32_t mailbox;
+    HAL_CAN_AddTxMessage(&hcan, &can1_hdr, data, mailbox);
+  }
+  
   /* USER CODE END SysTick_IRQn 0 */
   HAL_IncTick();
   /* USER CODE BEGIN SysTick_IRQn 1 */
@@ -197,6 +225,62 @@ void SysTick_Handler(void)
 /* For the available peripheral interrupt handler names,                      */
 /* please refer to the startup file (startup_stm32f1xx.s).                    */
 /******************************************************************************/
+
+/**
+  * @brief This function handles DMA1 channel1 global interrupt.
+  */
+void DMA1_Channel1_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA1_Channel1_IRQn 0 */
+
+  /* USER CODE END DMA1_Channel1_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_adc1);
+  /* USER CODE BEGIN DMA1_Channel1_IRQn 1 */
+
+  /* USER CODE END DMA1_Channel1_IRQn 1 */
+}
+
+/**
+  * @brief This function handles DMA1 channel2 global interrupt.
+  */
+void DMA1_Channel2_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA1_Channel2_IRQn 0 */
+
+  /* USER CODE END DMA1_Channel2_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_tim2_up);
+  /* USER CODE BEGIN DMA1_Channel2_IRQn 1 */
+
+  /* USER CODE END DMA1_Channel2_IRQn 1 */
+}
+
+/**
+  * @brief This function handles DMA1 channel5 global interrupt.
+  */
+void DMA1_Channel5_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA1_Channel5_IRQn 0 */
+
+  /* USER CODE END DMA1_Channel5_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_tim2_ch1);
+  /* USER CODE BEGIN DMA1_Channel5_IRQn 1 */
+
+  /* USER CODE END DMA1_Channel5_IRQn 1 */
+}
+
+/**
+  * @brief This function handles DMA1 channel7 global interrupt.
+  */
+void DMA1_Channel7_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA1_Channel7_IRQn 0 */
+
+  /* USER CODE END DMA1_Channel7_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_tim2_ch2_ch4);
+  /* USER CODE BEGIN DMA1_Channel7_IRQn 1 */
+
+  /* USER CODE END DMA1_Channel7_IRQn 1 */
+}
 
 /**
   * @brief This function handles USB low priority or CAN RX0 interrupts.

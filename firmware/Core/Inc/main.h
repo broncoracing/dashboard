@@ -37,6 +37,32 @@ extern "C" {
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
 
+struct CarState {
+  // Things from ECU
+  uint16_t rpm;
+  uint16_t lambda;
+  
+  uint16_t oil_temp;
+  uint16_t water_temp;
+  
+  uint16_t battery_voltage;
+  uint8_t gear_position;
+  uint8_t speedometer;
+
+  uint8_t apps;
+  uint8_t tps;
+  uint16_t bse_front;
+  uint16_t bse_rear;
+
+  // Things read from dash
+  uint8_t dial_pos[2];
+
+  // CAN Timeout
+  uint32_t last_message_tick; // Warning - will overflow if left running for a few months!
+};
+extern struct CarState carState;
+
+
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/
@@ -46,7 +72,8 @@ extern "C" {
 
 /* Exported macro ------------------------------------------------------------*/
 /* USER CODE BEGIN EM */
-
+#define CAN0_PERIOD_MS 100
+#define CAN1_PERIOD_MS 100
 /* USER CODE END EM */
 
 /* Exported functions prototypes ---------------------------------------------*/
@@ -57,6 +84,18 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define BTN0_Pin GPIO_PIN_2
+#define BTN0_GPIO_Port GPIOB
+#define BTN1_Pin GPIO_PIN_10
+#define BTN1_GPIO_Port GPIOB
+#define BTN2_Pin GPIO_PIN_11
+#define BTN2_GPIO_Port GPIOB
+#define BTN3_Pin GPIO_PIN_12
+#define BTN3_GPIO_Port GPIOB
+#define BTN4_Pin GPIO_PIN_14
+#define BTN4_GPIO_Port GPIOB
+#define BTN5_Pin GPIO_PIN_8
+#define BTN5_GPIO_Port GPIOA
 #define LED_7_Pin GPIO_PIN_9
 #define LED_7_GPIO_Port GPIOA
 #define LED_6_Pin GPIO_PIN_10
