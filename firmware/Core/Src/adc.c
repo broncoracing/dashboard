@@ -34,4 +34,6 @@ uint16_t read_adc(uint8_t channel) {
 // Read the mcu temperature value
 uint16_t read_temperature(void){
     uint16_t raw_value = read_adc(10);
+
+    return raw_value;
 }

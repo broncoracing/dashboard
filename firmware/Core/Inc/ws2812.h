@@ -21,6 +21,8 @@ union color_t {
     struct color_struct_t color;
 };
 
+void ws2812_init(void);
+
 void write_strip_8x(union color_t buffer[STRIPS_PER_GROUP * NUM_GROUPS][STRIP_LENGTH]);
 
 #endif

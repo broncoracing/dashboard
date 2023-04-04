@@ -54,9 +54,6 @@ struct CarState {
   uint16_t bse_front;
   uint16_t bse_rear;
 
-  // Things read from dash
-  uint8_t dial_pos[2];
-
   // CAN Timeout
   uint32_t last_message_tick; // Warning - will overflow if left running for a few months!
 };
@@ -82,6 +79,9 @@ extern struct CarState carState;
 // Don't allow downshifts above this RPM
 #define MONEY_SHIFT_THRESHOLD 10200
 
+
+// Time before the dashboard goes into CANT state
+#define NO_CAN_TIMEOUT 500 // milliseconds
 
 /* USER CODE END EM */
 

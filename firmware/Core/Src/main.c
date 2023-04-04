@@ -22,7 +22,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
-#include <math.h>
+// #include <math.h>
 
 #include "ws2812.h"
 #include "display.h"
@@ -113,10 +113,7 @@ void can_irq(CAN_HandleTypeDef *pcan) {
   } 
 }
 
-uint8_t rainbow_offset = 0;
-union color_t rainbow(struct xy_t coord){
-  return hsv((coord.x + coord.y) * 3 + rainbow_offset, 255, 2);
-}
+
 
 union color_t full_blast(struct xy_t coord){
   union color_t col = {.color={.r=255,.g=255,.b=255}};
@@ -140,7 +137,7 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
   // relocate vector table to work with bootloader
-	// SCB->VTOR = (uint32_t)0x08003000;
+	SCB->VTOR = (uint32_t)0x08003000;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -169,7 +166,8 @@ int main(void)
 
   HAL_ADCEx_Calibration_Start(&hadc1);
 
-  startup_animation();
+  init_ui();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -177,49 +175,11 @@ int main(void)
   while (1)
   {
     HAL_Delay(10); // Add some delay so we're not completely thrashing the mcu
-
-
-    
     // Update UI
     update_ui();
 
-    // Update dial positions
-    update_dial_state(adc_buffer[adc_buffer_idx][0], adc_buffer[adc_buffer_idx][1]);
-
     // TODO Watchdog timer
     
-    // light up LEDs
-    rainbow_offset += 4;
-    // shade_display(&rainbow);
-    wipe_display();
-
-    write_digit(carState.dial_pos[0], DIGIT_0, 1, COLOR_RED);
-
-    // write_int(adc_buffer[adc_buffer_idx][0], DIGIT_2, 4, COLOR_YELLOW);
-
-    // write voltage
-    uint32_t voltage = carState.battery_voltage;
-    union color_t voltage_color;
-    if(voltage < 10 * ECU_3_battery_voltage.divisor){
-      voltage_color = flash(COLOR_RED, 250, 125);
-    } else if(voltage < 11 * ECU_3_battery_voltage.divisor){
-      voltage_color = COLOR_ORANGE;
-    } else if(voltage < 12 * ECU_3_battery_voltage.divisor){
-      voltage_color = COLOR_YELLOW;
-    } else {
-      voltage_color = COLOR_GREEN;
-    }
-    write_fixedpoint(voltage, DIGIT_2, 4, 2, voltage_color);
-    
-    write_shift_lights(0, 4, COLOR_GREEN);
-    write_shift_lights(4, 4, COLOR_YELLOW);
-    write_shift_lights(8, 4, COLOR_ORANGE);
-    write_tach(0, 4, COLOR_RED);
-    write_status(3, COLOR_ORANGE);
-    write_status(4, voltage_color);
-    write_status(7, COLOR_BLUE);
-
-    update_display();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -452,7 +412,7 @@ static void MX_CAN_Init(void)
 
   // Second filter - Bootloader requests
   sf.FilterMaskIdLow = 0x7FF << 5;
-  sf.FilterIdLow = BOOTLOADER_ID;
+  sf.FilterIdLow = BOOTLOADER_ID << 5;
 
   // Filters into CAN FIFO 0
   sf.FilterFIFOAssignment = CAN_FILTER_FIFO0;
@@ -506,7 +466,7 @@ static void MX_TIM2_Init(void)
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim2.Init.Period = 90;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
   {
     Error_Handler();

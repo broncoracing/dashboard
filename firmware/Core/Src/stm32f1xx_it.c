@@ -23,8 +23,10 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 // #include "main.h"
-// #include "dial.h"
+#include "dial.h"
+#include "adc.h"
 #include "can-ids/CAN.h"
+#include "button.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -190,6 +192,9 @@ void SysTick_Handler(void)
 {
   /* USER CODE BEGIN SysTick_IRQn 0 */
 
+  // Update dial positions
+  update_dial_state(read_adc(0), read_adc(1));
+
   // Send CAN messages at the pre-defined rates
   if(HAL_GetTick() % CAN0_PERIOD_MS == 0){
     CAN_TxHeaderTypeDef can0_hdr;
@@ -198,10 +203,10 @@ void SysTick_Handler(void)
     can0_hdr.StdId = DASHBOARD_0_ID;
     can0_hdr.RTR = CAN_RTR_DATA;
     uint8_t data[8];
-    data[0] = carState.dial_pos[0];
-    data[1] = carState.dial_pos[1];
+    data[0] = get_dial(DIAL_0);
+    data[1] = get_dial(DIAL_1);
     uint32_t mailbox;
-    HAL_CAN_AddTxMessage(&hcan, &can0_hdr, data, mailbox);
+    HAL_CAN_AddTxMessage(&hcan, &can0_hdr, data, &mailbox);
   }
   if(HAL_GetTick() % CAN1_PERIOD_MS == 0){
     CAN_TxHeaderTypeDef can1_hdr;
@@ -214,7 +219,22 @@ void SysTick_Handler(void)
 
     data[0] = 0;
 
-    HAL_CAN_AddTxMessage(&hcan, &can1_hdr, data, mailbox);
+    if(get_button(BTN_UPSHIFT)) {
+      data[0] |= 1 << DASHBOARD_1_upshift.start;
+    }
+    
+    if(get_button(BTN_DOWNDHIFT)) {
+      if(carState.rpm < MONEY_SHIFT_THRESHOLD) {
+        data[0] |= 1 << DASHBOARD_1_downshift.start;
+      } else {
+        // TODO Do something when a money shift is attempted?
+      }
+    }
+
+    if(get_button(BTN_LAUNCH_CTRL)) {
+      data[0] |= 1 << DASHBOARD_1_launch_ctrl.start;
+    }
+    HAL_CAN_AddTxMessage(&hcan, &can1_hdr, data, &mailbox);
   }
   
   /* USER CODE END SysTick_IRQn 0 */

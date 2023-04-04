@@ -13,7 +13,7 @@ const uint16_t group_pins[2][4] = {
     {LED_4_Pin, LED_5_Pin, LED_6_Pin, LED_7_Pin}
 };
 
-GPIO_TypeDef group_ports[2] = {{LED_0_GPIO_Port, LED_4_GPIO_Port}}; // double braces to appease GCC
+GPIO_TypeDef *group_ports[2] = {LED_0_GPIO_Port, LED_4_GPIO_Port}; // double braces to appease GCC
 
 // half-word to be written to bit set register to set all current LED pins to high
 // or to the bit reset register to set all to low
@@ -23,41 +23,80 @@ uint16_t pin_set[NUM_GROUPS];
 // There is one extra LED worth at the end because apparently WS2812s like that.
 uint16_t bssr0[NUM_GROUPS][STRIP_LENGTH + 1][BITS_PER_PIXEL];
 
+
 // Start DMA for a group of four strips.
 void ws2812_dma_start(uint16_t *bssr0_buffer, uint8_t group_idx) {
-    GPIO_TypeDef *port = &group_ports[group_idx];
+    GPIO_TypeDef *port = group_ports[group_idx];
     // Make sure timer is stopped so we don't prematurely do anything
     __HAL_TIM_DISABLE(&htim2);
+
     // Set the timer to just before reset, so that the reset event gets called first
     __HAL_TIM_SET_COUNTER(&htim2, __HAL_TIM_GET_AUTORELOAD(&htim2) - 1);
 
-    // Make sure timer DMA triggers are enabled
-    __HAL_TIM_ENABLE_DMA(&htim2, TIM_DMA_UPDATE);
-    __HAL_TIM_ENABLE_DMA(&htim2, TIM_DMA_CC1);
-    __HAL_TIM_ENABLE_DMA(&htim2, TIM_DMA_CC2);
 
-    // Clear DMA transfer complete flags. This way we can tell when the DMA transfer is complete because they will be set again.
-    __HAL_DMA_CLEAR_FLAG(&hdma_tim2_up, __HAL_DMA_GET_TC_FLAG_INDEX(&hdma_tim2_up));
-    __HAL_DMA_CLEAR_FLAG(&hdma_tim2_ch1, __HAL_DMA_GET_TC_FLAG_INDEX(&hdma_tim2_ch1));
-    __HAL_DMA_CLEAR_FLAG(&hdma_tim2_ch2_ch4, __HAL_DMA_GET_TC_FLAG_INDEX(&hdma_tim2_ch2_ch4));
+    // Configure DMA
+    /* TIM2_UP Init */
+    hdma_tim2_up.Init.Direction = DMA_MEMORY_TO_PERIPH;
+    hdma_tim2_up.Init.PeriphInc = DMA_PINC_DISABLE;
+    hdma_tim2_up.Init.MemInc = DMA_MINC_DISABLE;
+    hdma_tim2_up.Init.PeriphDataAlignment = DMA_PDATAALIGN_WORD;
+    hdma_tim2_up.Init.MemDataAlignment = DMA_MDATAALIGN_HALFWORD;
+    hdma_tim2_up.Init.Mode = DMA_CIRCULAR;
+    hdma_tim2_up.Init.Priority = DMA_PRIORITY_VERY_HIGH;
+
+    HAL_DMA_Init(&hdma_tim2_up);
+
+    /* TIM2_CH1 Init */
+    hdma_tim2_ch1.Instance = DMA1_Channel5;
+    hdma_tim2_ch1.Init.Direction = DMA_MEMORY_TO_PERIPH;
+    hdma_tim2_ch1.Init.PeriphInc = DMA_PINC_DISABLE;
+    hdma_tim2_ch1.Init.MemInc = DMA_MINC_ENABLE;
+    hdma_tim2_ch1.Init.PeriphDataAlignment = DMA_PDATAALIGN_WORD;
+    hdma_tim2_ch1.Init.MemDataAlignment = DMA_MDATAALIGN_HALFWORD;
+    hdma_tim2_ch1.Init.Mode = DMA_NORMAL;
+    hdma_tim2_ch1.Init.Priority = DMA_PRIORITY_VERY_HIGH;
+
+    HAL_DMA_Init(&hdma_tim2_ch1);
+
+    /* TIM2_CH2_CH4 Init */
+    hdma_tim2_ch2_ch4.Instance = DMA1_Channel7;
+    hdma_tim2_ch2_ch4.Init.Direction = DMA_MEMORY_TO_PERIPH;
+    hdma_tim2_ch2_ch4.Init.PeriphInc = DMA_PINC_DISABLE;
+    hdma_tim2_ch2_ch4.Init.MemInc = DMA_MINC_DISABLE;
+    hdma_tim2_ch2_ch4.Init.PeriphDataAlignment = DMA_PDATAALIGN_WORD;
+    hdma_tim2_ch2_ch4.Init.MemDataAlignment = DMA_MDATAALIGN_HALFWORD;
+    hdma_tim2_ch2_ch4.Init.Mode = DMA_CIRCULAR;
+    hdma_tim2_ch2_ch4.Init.Priority = DMA_PRIORITY_VERY_HIGH;
+
+    HAL_DMA_Init(&hdma_tim2_ch2_ch4);
+
 
     // Start DMA transfers
-    HAL_DMA_Start(&hdma_tim2_up,      (uint32_t) &pin_set[group_idx], (uint32_t) &port->BSRR, DMA_LENGTH); // Set all to high
+    HAL_DMA_Start(&hdma_tim2_up,      (uint32_t) &pin_set[group_idx], (uint32_t) &port->BSRR,  DMA_LENGTH); // Set all to high
     HAL_DMA_Start(&hdma_tim2_ch1,     (uint32_t) bssr0_buffer,        (uint32_t) &port->BRR,  DMA_LENGTH); // set zeros to low
     HAL_DMA_Start(&hdma_tim2_ch2_ch4, (uint32_t) &pin_set[group_idx], (uint32_t) &port->BRR,  DMA_LENGTH); // set all to low
 
     // Start timer. Now data will start flowing.
+    __HAL_TIM_ENABLE_DMA(&htim2, TIM_DMA_UPDATE);
+    __HAL_TIM_ENABLE_DMA(&htim2, TIM_DMA_CC1);
+    __HAL_TIM_ENABLE_DMA(&htim2, TIM_DMA_CC2);
+
+    // start transfer
     __HAL_TIM_ENABLE(&htim2);
 }
 
 
 void ws2812_dma_wait() {
     // Wait for DMA to finish
-    while(!__HAL_DMA_GET_TC_FLAG_INDEX(&hdma_tim2_ch2_ch4));
+    while(!(DMA1->ISR & DMA_ISR_TCIF5));
     
     // Now that DMA is finished, clean up after ourselves.
     // Stop timer
     __HAL_TIM_DISABLE(&htim2);
+    
+    // Clear DMA transfer complete flags. This way we can tell when the DMA transfer is complete because they will be set again.
+    DMA1->IFCR = DMA_IFCR_CTCIF5;
+
 }
 
 void ws2812_init(void){
@@ -91,8 +130,8 @@ void write_strip_4x(union color_t buffer[STRIPS_PER_GROUP][STRIP_LENGTH], uint8_
             bssr_val |= pin_mask[2] * ((c2_inv >> bit) & 1);
             bssr_val |= pin_mask[3] * ((c3_inv >> bit) & 1);
 
-            // Write to bssr buffer
-            bssr0[group_idx][i][bit] = bssr_val;
+            // Write to bssr buffer (Backwards bit order because of the way ws2812s are)
+            bssr0[group_idx][i][23 - bit] = bssr_val;
 
             // // Loop version, 50uS delay (Longer than recommended by datasheet)
             // // Loop through each strip
@@ -119,11 +158,12 @@ void write_strip_8x(union color_t buffer[STRIPS_PER_GROUP * NUM_GROUPS][STRIP_LE
     // If the DMA transaction is still happening, wait for it to finish.
     ws2812_dma_wait();
     // Clear the port to zero (should already be zero)
-    group_ports[0].BRR = pin_set[0];
+    group_ports[0]->BRR = pin_set[0];
+
     //start DMA for second group
     ws2812_dma_start(&bssr0[1][0][0], 1);
     // Wait for DMA transaction to finish
     ws2812_dma_wait();
     // Clear the port to zero (should already be zero)
-    group_ports[0].BRR = pin_set[0];
+    group_ports[1]->BRR = pin_set[1];
 }

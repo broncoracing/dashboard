@@ -1,6 +1,7 @@
 #include "display.h"
 #include "main.h"
 #include <string.h>
+#include <math.h>
 
 union color_t display_frame_buffer[NUM_STRIPS][STRIP_LENGTH];
 
@@ -199,14 +200,13 @@ void write_digit(uint8_t value, enum DigitPosition digit, uint8_t dp, union colo
 }
 
 
-void write_char(uint8_t character, enum DigitPosition digit, uint8_t dp, union color_t color) {
+void write_char(uint16_t character, enum DigitPosition digit, uint8_t dp, union color_t color) {
   if(dp) {
-    character |= digit_dp;
+    character |= 1;
   }
-  for(uint8_t segment = 0; segment < 8; ++segment){
-    if((character >> segment) & 1){
-        display_frame_buffer[digit][segment_idx_table[segment][0]] = color;
-        display_frame_buffer[digit][segment_idx_table[segment][1]] = color;
+  for(uint8_t pixel = 0; pixel < 15; ++pixel){
+    if((character >> pixel) & 1){
+        display_frame_buffer[digit][pixel] = color;
     }
   }
 }
@@ -239,49 +239,6 @@ void write_fixedpoint(uint32_t value, enum DigitPosition startDigit, uint8_t len
   }
   // write dp
   write_char(0b00000000, startDigit + length - decimals - 1, 1, color);
-}
-
-// Wipe animation for startup
-int32_t wipe_var;
-#define MAX(x, y) (((x) > (y)) ? (x) : (y))
-#define MIN(x, y) (((x) < (y)) ? (x) : (y))
-union color_t gold_wipe(struct xy_t coord){
-  int32_t cx = coord.x - 67;
-  int32_t cy = coord.y - 10;
-
-  int32_t dist = sqrt(cx * cx + cy * cy);
-
-  int32_t anim_brightness = MAX(MIN((wipe_var - dist) * 2, 40), 0) * brightness / 256;
-  return hsv(13, 255, anim_brightness);
-}
-
-void startup_animation(void) {
-  wipe_var = 0;
-  brightness = 50;
-  // wipe in
-  for(uint32_t i = 0; i < 100; ++i) {
-    shade_display(gold_wipe);
-    wipe_var += 2;
-    write_char(b_7SEG, DIGIT_1, 1, COLOR_GOLD);
-    write_char(r_7SEG, DIGIT_1, 1, COLOR_GOLD);
-    write_char(dash_7SEG, DIGIT_1, 1, COLOR_GOLD);
-    write_char(digit_lookup_table[2], DIGIT_1, 1, COLOR_GOLD);
-    write_char(digit_lookup_table[3], DIGIT_1, 1, COLOR_GOLD);
-    HAL_Delay(5);
-  }
-  // fade out
-  for(uint32_t i = 0; i < 50; ++i) {
-    brightness = 50 - i;
-
-    shade_display(gold_wipe);
-    write_char(b_7SEG, DIGIT_1, 1, COLOR_GOLD);
-    write_char(r_7SEG, DIGIT_1, 1, COLOR_GOLD);
-    write_char(dash_7SEG, DIGIT_1, 1, COLOR_GOLD);
-    write_char(digit_lookup_table[2], DIGIT_1, 1, COLOR_GOLD);
-    write_char(digit_lookup_table[3], DIGIT_1, 1, COLOR_GOLD);
-    HAL_Delay(5);
-  }
-  brightness = DEFAULT_BRIGHTNESS;
 }
 
 
