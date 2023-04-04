@@ -91,7 +91,8 @@ void can_irq(CAN_HandleTypeDef *pcan) {
         __NVIC_SystemReset(); // Reset to bootloader
         break;
       case ECU_1_ID:
-
+        carState.rpm = read_field_u16(&ECU_1_rpm, data);
+        carState.lambda = read_field_u16(&ECU_1_lamda, data);
         break;
       case ECU_2_ID:
 

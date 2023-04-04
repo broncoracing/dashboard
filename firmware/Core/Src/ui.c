@@ -179,13 +179,20 @@ void update_ui(void) {
     // If CAN is missing, switch to the CANT state
     if(HAL_GetTick() - carState.last_message_tick > NO_CAN_TIMEOUT) {
       if(ui_state != UI_CANT && ui_state != UI_STARTUP_ANIM) {
-        // update_state(UI_CANT);
+        update_state(UI_CANT);
       }
     }
 
     switch(ui_state) {
         case UI_ERROR:
-          // shade_display(&rainbow);
+          shade_display(&rainbow);
+          rainbow_offset++;
+
+          write_char(E_7SEG, DIGIT_0, 0, COLOR_WHITE);
+          write_char(r_7SEG, DIGIT_1, 0, COLOR_WHITE);
+          write_char(r_7SEG, DIGIT_2, 0, COLOR_WHITE);
+          write_char(o_7SEG, DIGIT_3, 0, COLOR_WHITE);
+          write_char(r_7SEG, DIGIT_4, 1, COLOR_WHITE);
           break;
         case UI_STARTUP_ANIM:
           if(carState.rpm > 0) { // skip anim if engine is running
@@ -211,47 +218,51 @@ void update_ui(void) {
 
           break;
         case UI_ENGINE_OFF:
-          // shade_display(&rainbow);
-          carState.rpm = (HAL_GetTick() % 14500);
+          {
+            if(carState.rpm > 0) { // Check if engine is running
+              update_state(UI_ENGINE_RUNNING);
+            }
 
-          // write_digit(get_dial(DIAL_0), DIGIT_0, 1, COLOR_RED);
+            // Write dial state
+            // write_digit(get_dial(DIAL_0), DIGIT_0, 1, COLOR_RED);
 
-          write_int(carState.rpm, DIGIT_1, 5, COLOR_YELLOW);
+            // Write "OFF"
+            write_digit(0, DIGIT_0, 0, COLOR_WHITE);
+            write_char(F_7SEG, DIGIT_1, 0, COLOR_WHITE);
+            write_char(F_7SEG, DIGIT_2, 0, COLOR_WHITE);
+            
+            // Draw voltage and voltage light
+            union color_t v_col = voltage_color();
+            write_status(4, v_col);
+            write_fixedpoint(carState.battery_voltage, DIGIT_3, 3, 1, v_col);
 
+            draw_shift_lights();
+            draw_tach();
+          }
           
-          // write_fixedpoint(voltage, DIGIT_2, 4, 2, voltage_color);
-          
-          // write_shift_lights(0, 4, COLOR_GREEN);
-          // write_shift_lights(4, 4, COLOR_YELLOW);
-          // write_shift_lights(8, 4, COLOR_ORANGE);
-          // write_tach(0, 4, COLOR_RED);
-          write_status(3, COLOR_ORANGE);
-          write_status(4, voltage_color());
-          write_status(7, COLOR_RED);
-
-
-
-          draw_shift_lights();
-          draw_tach();
           break;
+
         case UI_ENGINE_RUNNING:
-                    // shade_display(&rainbow);
+          {
+            if(carState.rpm == 0) { // Check if engine is running
+              update_state(UI_ENGINE_OFF);
+            }
+            // Write dial state
+            // write_digit(get_dial(DIAL_0), DIGIT_0, 1, COLOR_RED);
 
-          write_digit(get_dial(DIAL_0), DIGIT_0, 1, COLOR_RED);
+            // Write RPM
+            write_int(carState.rpm, DIGIT_0, 6, COLOR_RED);
+            
+            // Draw  voltage light
+            union color_t v_col = voltage_color();
+            write_status(4, v_col);
 
-          // write_int(adc_buffer[adc_buffer_idx][0], DIGIT_2, 4, COLOR_YELLOW);
-
+            draw_shift_lights();
+            draw_tach();
+          }
           
-          // write_fixedpoint(voltage, DIGIT_2, 4, 2, voltage_color);
-          
-          write_shift_lights(0, 4, COLOR_GREEN);
-          write_shift_lights(4, 4, COLOR_YELLOW);
-          write_shift_lights(8, 4, COLOR_ORANGE);
-          write_tach(0, 4, COLOR_RED);
-          write_status(3, COLOR_ORANGE);
-          write_status(4, voltage_color());
-          write_status(7, COLOR_BLUE);
           break;
+
         default:
           update_state(UI_ERROR);
     }
