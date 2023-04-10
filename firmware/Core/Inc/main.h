@@ -45,8 +45,10 @@ struct CarState {
   uint16_t oil_temp;
   uint16_t water_temp;
   
+  uint16_t oil_pressure;
   uint16_t battery_voltage;
   uint8_t gear_position;
+  uint16_t fuel_pressure;
   uint8_t speedometer;
 
   uint8_t apps;
@@ -54,6 +56,12 @@ struct CarState {
   uint16_t bse_front;
   uint16_t bse_rear;
 
+  // Things from dyno controller
+  uint16_t dyno_rpm;
+  uint16_t dyno_target;
+  uint16_t dyno_load;
+  uint16_t dyno_valve_pos;
+  
   // CAN Timeout
   uint32_t last_message_tick; // Warning - will overflow if left running for a few months!
 };

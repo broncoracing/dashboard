@@ -15,7 +15,7 @@ int32_t startup_wipe_var;
 enum StartupAnimState_t {
   SA_Bronco,
   SA_Racing,
-  SA_BR23
+  SA_BR23,
 } startup_anim_state;
 
 void update_state(enum UI_State_t new_state){
@@ -51,6 +51,11 @@ void init_ui(void){
 
   update_state(UI_STARTUP_ANIM);
 }
+
+void connect_dyno(void) {
+  update_state(UI_DYNO_DISPLAY);
+}
+
 
 // Wipe animation for startup
 uint8_t wipe_anim_brightness;
@@ -173,6 +178,47 @@ union color_t rainbow(struct xy_t coord){
   return hsv((coord.x + coord.y) * 3 + rainbow_offset, 255, 2);
 }
 
+void engine_status_lights(void) {
+  // voltage status light
+  union color_t v_col = voltage_color();
+  write_status(4, v_col);
+
+  // temp light
+  union color_t ect_color;
+  if(carState.water_temp > 95 * ECU_2_water_temp.divisor) {
+    ect_color = flash(COLOR_VERY_RED, 500, 250);
+  } else if (carState.water_temp > 85 * ECU_2_water_temp.divisor) {
+    ect_color = COLOR_RED;
+  } else if (carState.water_temp > 45 * ECU_2_water_temp.divisor) {
+    ect_color = COLOR_GREEN;
+  } else {
+    ect_color = COLOR_CYAN;
+  }
+
+  write_status(5, ect_color);
+
+  // fuel pressure light
+  union color_t fuel_pressure_color;
+  if(carState.fuel_pressure > 300) {
+    fuel_pressure_color = COLOR_GREEN;
+  } else if(carState.fuel_pressure > 250) {
+    fuel_pressure_color = COLOR_ORANGE;
+  } else {
+    fuel_pressure_color = COLOR_RED;
+  }
+  write_status(6, fuel_pressure_color);
+
+  // oil pressure light
+  if(carState.oil_pressure < 100) {
+    write_status(7, COLOR_RED);
+  } else {
+    write_status(7, COLOR_GREEN);
+  }
+  // check engine light (always on)
+  write_status(3, COLOR_RED);
+
+}
+
 void update_ui(void) {
     wipe_display();
 
@@ -205,6 +251,9 @@ void update_ui(void) {
           }
           break;
         case UI_CANT:
+          if(HAL_GetTick() - carState.last_message_tick < NO_CAN_TIMEOUT) {
+            update_state(UI_ENGINE_OFF);
+          }
           can_pulse_brightness = HAL_GetTick() % 1000 > 900 ? brightness : 0;
           // if(can_pulse_brightness > 1000) can_pulse_brightness = 000 - can_pulse_brightness;
           // can_pulse_brightness = gamma_16(can_pulse_brightness * 30) * brightness / 256 / 256;
@@ -233,11 +282,13 @@ void update_ui(void) {
             
             // Draw voltage and voltage light
             union color_t v_col = voltage_color();
-            write_status(4, v_col);
-            write_fixedpoint(carState.battery_voltage, DIGIT_3, 3, 1, v_col);
+            
+            write_fixedpoint(carState.battery_voltage / 100, DIGIT_3, 3, 1, v_col);
 
             draw_shift_lights();
             draw_tach();
+
+            engine_status_lights();
           }
           
           break;
@@ -251,11 +302,10 @@ void update_ui(void) {
             // write_digit(get_dial(DIAL_0), DIGIT_0, 1, COLOR_RED);
 
             // Write RPM
-            write_int(carState.rpm, DIGIT_0, 6, COLOR_RED);
+            write_fixedpoint(carState.rpm / 100, DIGIT_3, 3, 1, COLOR_RED);
             
-            // Draw  voltage light
-            union color_t v_col = voltage_color();
-            write_status(4, v_col);
+            // Draw  status lights
+            engine_status_lights();
 
             draw_shift_lights();
             draw_tach();
@@ -263,6 +313,38 @@ void update_ui(void) {
           
           break;
 
+        case UI_DYNO_DISPLAY:
+         {
+            // Write target RPM
+            write_fixedpoint(carState.dyno_target / 100, DIGIT_0, 3, 1, COLOR_WHITE);
+
+            // Write RPM
+            int32_t dyno_err = carState.dyno_target - carState.dyno_rpm;
+            if(dyno_err < 0) dyno_err = -dyno_err;
+            union color_t dyno_rpm_col;
+
+            if(dyno_err < 100){
+              dyno_rpm_col = COLOR_GREEN;
+            }else if(dyno_err < 250) {
+              dyno_rpm_col = COLOR_YELLOW;
+            } else if(dyno_err < 500) {
+              dyno_rpm_col = COLOR_ORANGE;
+            } else {
+              dyno_rpm_col = COLOR_RED;
+            }
+            write_fixedpoint(carState.dyno_rpm / 100, DIGIT_3, 3, 1, dyno_rpm_col);
+            
+            // Draw status lights
+          
+            engine_status_lights();
+
+            // use shift ligts for valve pos
+            uint8_t n_shift_lights = (uint32_t) carState.dyno_valve_pos * 12 / 12000;
+            if(n_shift_lights > 12) n_shift_lights = 12;
+            write_shift_lights(0, n_shift_lights, COLOR_RED);
+            draw_tach();
+         }
+         break;
         default:
           update_state(UI_ERROR);
     }

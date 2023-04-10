@@ -57,7 +57,7 @@ void shade_display(display_shader_t shader);
 // 7 segment characters
 
 enum Char7Seg {
-  a_7SEG=   0b0111111111100111,
+  a_7SEG=   0b0111111111100110,
   A_7SEG=   0b0111111001111110,
   b_7SEG=   0b0000011111111110,
   c_7SEG=   0b0000000111100110,

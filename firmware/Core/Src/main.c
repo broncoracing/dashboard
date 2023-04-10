@@ -95,10 +95,13 @@ void can_irq(CAN_HandleTypeDef *pcan) {
         carState.lambda = read_field_u16(&ECU_1_lamda, data);
         break;
       case ECU_2_ID:
-
+        carState.water_temp = read_field_u16(&ECU_2_water_temp, data);
+        carState.oil_temp = read_field_u16(&ECU_2_oil_temp, data);
         break;
       case ECU_3_ID:
+        carState.oil_pressure = read_field_u16(&ECU_3_oil_pressure, data);
         carState.battery_voltage = read_field_u16(&ECU_3_battery_voltage, data);
+        carState.fuel_pressure = read_field_u16(&ECU_3_fuel_pressure, data);
         break;
       case ECU_4_ID:
 
@@ -107,6 +110,15 @@ void can_irq(CAN_HandleTypeDef *pcan) {
 
         break;
 
+      case DYNO_CONTROLLER_ID:
+        connect_dyno(); // Switch to dyno UI, since we got a dyno packet
+
+        // Read dyno state
+        carState.dyno_rpm = read_field_u16(&DYNO_CONTROLLER_dyno_rpm, data);
+        carState.dyno_target = read_field_u16(&DYNO_CONTROLLER_dyno_target, data);
+        carState.dyno_load = read_field_u16(&DYNO_CONTROLLER_dyno_load, data);
+        carState.dyno_valve_pos = read_field_u16(&DYNO_CONTROLLER_dyno_valve_pos, data);
+        break;
       default:
         // carState.rpm = msg.StdId; // For testing
         break;

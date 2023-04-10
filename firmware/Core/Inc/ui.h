@@ -21,6 +21,7 @@ enum UI_State_t {
     UI_CANT, // bus is unable to can
     UI_ENGINE_OFF,
     UI_ENGINE_RUNNING,
+    UI_DYNO_DISPLAY,
     UI_NUM_STATES
 };
 
@@ -32,6 +33,6 @@ void init_ui(void);
 
 void update_ui(void);
 
-
+void connect_dyno(void);
 
 #endif

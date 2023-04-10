@@ -26,6 +26,7 @@ uint16_t bssr0[NUM_GROUPS][STRIP_LENGTH + 1][BITS_PER_PIXEL];
 
 // Start DMA for a group of four strips.
 void ws2812_dma_start(uint16_t *bssr0_buffer, uint8_t group_idx) {
+    __disable_irq();
     GPIO_TypeDef *port = group_ports[group_idx];
     // Make sure timer is stopped so we don't prematurely do anything
     __HAL_TIM_DISABLE(&htim2);
@@ -83,6 +84,7 @@ void ws2812_dma_start(uint16_t *bssr0_buffer, uint8_t group_idx) {
 
     // start transfer
     __HAL_TIM_ENABLE(&htim2);
+    __enable_irq();
 }
 
 
