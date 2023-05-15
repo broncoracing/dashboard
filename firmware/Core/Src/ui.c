@@ -5,7 +5,7 @@
 #include "ws2812.h"
 
 #include <math.h>
-
+#include "button.h"
 enum UI_State_t ui_state = UI_STARTUP_ANIM;
 
 uint8_t auto_brighness_enabled = 0;
@@ -279,6 +279,11 @@ void update_ui(void) {
             write_digit(0, DIGIT_0, 0, COLOR_WHITE);
             write_char(F_7SEG, DIGIT_1, 0, COLOR_WHITE);
             write_char(F_7SEG, DIGIT_2, 0, COLOR_WHITE);
+            // uint8_t btn_s = 0;
+            // for(uint8_t i = 0; i < NUM_BTNS; ++i) {
+            //   if(get_button(i)) btn_s |= 1 << i;
+            // }
+            // write_fixedpoint(btn_s, DIGIT_0, 3, 0, COLOR_CYAN);
             
             // Draw voltage and voltage light
             union color_t v_col = voltage_color();

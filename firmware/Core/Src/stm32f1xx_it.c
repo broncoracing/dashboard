@@ -194,7 +194,9 @@ void SysTick_Handler(void)
 
   // Update dial positions
   update_dial_state(read_adc(0), read_adc(1));
-
+  //update button states
+  update_buttons();
+  
   // Send CAN messages at the pre-defined rates
   if(HAL_GetTick() % CAN0_PERIOD_MS == 0){
     CAN_TxHeaderTypeDef can0_hdr;
@@ -234,6 +236,7 @@ void SysTick_Handler(void)
     if(get_button(BTN_LAUNCH_CTRL)) {
       data[0] |= 1 << DASHBOARD_1_launch_ctrl.start;
     }
+    
     HAL_CAN_AddTxMessage(&hcan, &can1_hdr, data, &mailbox);
   }
   

@@ -6,12 +6,12 @@
 #define BUTTON_DEBOUNCE_PERIOD 50
 
 enum ButtonInput_t {
-    BTN_UPSHIFT=0,
-    BTN_DOWNDHIFT=1,
-    BTN_LAUNCH_CTRL=2,
-    BTN_3,
+    BTN_0,
+    BTN_UPSHIFT=1,
+    BTN_2,
+    BTN_DOWNDHIFT=3,
     BTN_4,
-    BTN_5,
+    BTN_LAUNCH_CTRL=5,
     NUM_BTNS
 };
 

@@ -29,7 +29,8 @@ void init_buttons(void) {
 }
 
 uint8_t get_button(enum ButtonInput_t channel){
-    return button_state[channel].state;
+    if(button_state[channel].gpio_state) return 0;
+    else return 1;
 }
 
 // Updates buttons with debouncing
