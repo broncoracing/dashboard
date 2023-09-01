@@ -194,6 +194,7 @@ void SysTick_Handler(void)
   /* USER CODE BEGIN SysTick_IRQn 0 */
 
   // Update dial positions
+  update_adc();
   update_dial_state(read_adc(0), read_adc(1));
   //update button states
   update_buttons();

@@ -185,22 +185,27 @@ union color_t rainbow(struct xy_t coord){
   return hsv((coord.x + coord.y) * 3 + rainbow_offset, 255, 2);
 }
 
-void engine_status_lights(void) {
-  // voltage status light
-  union color_t v_col = voltage_color();
-  write_status(4, v_col);
-
-  // temp light
+union color_t get_ect_color(void) {
   union color_t ect_color;
-  if(carState.water_temp > 95 * ECU_2_water_temp.divisor) {
+  if(carState.water_temp > 100 * ECU_2_water_temp.divisor) {
     ect_color = flash(COLOR_VERY_RED, 500, 250);
-  } else if (carState.water_temp > 85 * ECU_2_water_temp.divisor) {
+  } else if (carState.water_temp > 90 * ECU_2_water_temp.divisor) {
     ect_color = COLOR_RED;
   } else if (carState.water_temp > 45 * ECU_2_water_temp.divisor) {
     ect_color = COLOR_GREEN;
   } else {
     ect_color = COLOR_CYAN;
   }
+  return ect_color;
+}
+
+void engine_status_lights(void) {
+  // voltage status light
+  union color_t v_col = voltage_color();
+  write_status(4, v_col);
+
+  // temp light
+  union color_t ect_color = get_ect_color();
 
   write_status(5, ect_color);
 
@@ -229,26 +234,43 @@ void engine_status_lights(void) {
 
 // process toggling into/out of diagnostic mode
 void diagnostic_toggle(void) {
-  if(get_button(BTN_LOG_MARKER) && get_button(BTN_LAUNCH_CTRL)) {
-    write_shift_lights(0, 8, COLOR_CYAN);
-    ui_diag_timer++;
-    if(ui_diag_timer > 200) {
-      if(ui_state == UI_DIAGNOSTICS) {
+  if(ui_state == UI_DIAGNOSTICS){
+    if(get_button(BTN_LAUNCH_CTRL)) {
+      write_shift_lights(0, 8, COLOR_RED);
+      ui_diag_timer++;
+      if(ui_diag_timer > 200) {
         update_state(UI_ENGINE_OFF);
-      } else {
-        update_state(UI_DIAGNOSTICS);
+        ui_diag_timer = 0;
       }
+    } else if(get_button(BTN_LOG_MARKER)) {
+      write_shift_lights(0, 8, COLOR_GREEN);
+
+      ui_diag_timer++;
+      if(ui_diag_timer > 200) {
+        update_state(UI_ENGINE_OFF);
+        ui_diag_timer = 0;
+      }
+    }else {
       ui_diag_timer = 0;
     }
   } else {
-    ui_diag_timer = 0;
+    if(get_button(BTN_LOG_MARKER) && get_button(BTN_LAUNCH_CTRL)) {
+      write_shift_lights(0, 8, COLOR_CYAN);
+      ui_diag_timer++;
+      if(ui_diag_timer > 200) {
+        update_state(UI_DIAGNOSTICS);
+        ui_diag_timer = 0;
+      }
+    } else {
+      ui_diag_timer = 0;
+    }
   }
 }
 
 void update_ui(void) {
-    if(get_button(BTN_UPSHIFT) && get_button(BTN_DOWNDHIFT)) {
+    if(get_button(BTN_LOG_MARKER)) {
       rainbow_timer++;
-      if(rainbow_timer > 300) {
+      if(rainbow_timer > 1000) {
         rainbow_mode = !rainbow_mode;
         rainbow_timer = 0;
       }
@@ -314,10 +336,16 @@ void update_ui(void) {
             // Write dial state
             // write_digit(get_dial(DIAL_0), DIGIT_0, 1, COLOR_RED);
 
-            // Write "OFF"
-            write_digit(0, DIGIT_0, 0, COLOR_WHITE);
-            write_char(F_7SEG, DIGIT_1, 0, COLOR_WHITE);
-            write_char(F_7SEG, DIGIT_2, 0, COLOR_WHITE);
+            if(HAL_GetTick() % 2000 < 1000) {
+
+              union color_t temp_color = get_ect_color();
+              write_int(carState.water_temp /  ECU_2_water_temp.divisor, DIGIT_0, 3, temp_color);
+            } else {
+              // Write "OFF"
+              write_digit(0, DIGIT_0, 0, COLOR_WHITE);
+              write_char(F_7SEG, DIGIT_1, 0, COLOR_WHITE);
+              write_char(F_7SEG, DIGIT_2, 0, COLOR_WHITE);
+            }
             // uint8_t btn_s = 0;
             // for(uint8_t i = 0; i < NUM_BTNS; ++i) {
             //   if(get_button(i)) btn_s |= 1 << i;
@@ -346,6 +374,9 @@ void update_ui(void) {
             }
             // Write dial state
             // write_digit(get_dial(DIAL_0), DIGIT_0, 1, COLOR_RED);
+            // write temperature
+            union color_t temp_color = get_ect_color();
+            write_int(carState.water_temp / ECU_2_water_temp.divisor, DIGIT_0, 3, temp_color);
 
             // Write RPM
             write_fixedpoint(carState.rpm / 100, DIGIT_3, 3, 1, COLOR_RED);
@@ -367,8 +398,16 @@ void update_ui(void) {
                 write_shift_lights(btn, 1, COLOR_WHITE);
               }
             }
+            write_int(get_dial(DIAL_0), DIGIT_5, 1, COLOR_YELLOW);
+            write_int(get_dial(DIAL_1), DIGIT_4, 1, COLOR_ORANGE);
 
-            ui_clear_faults = get_button(BTN_UPSHIFT) && get_button(BTN_DOWNDHIFT);
+
+            // uint32_t thing = (HAL_GetTick() / 1000) % 10;
+            // write_digit(thing, DIGIT_0, 0, COLOR_WHITE);
+
+            // write_int(adc)
+
+            ui_clear_faults = get_button(BTN_LOG_MARKER);
             write_int(carState.ecu_fault_code, DIGIT_0, 3, COLOR_RED);
             diagnostic_toggle();
           }

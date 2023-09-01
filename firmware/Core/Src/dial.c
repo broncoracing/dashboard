@@ -47,5 +47,5 @@ void update_dial_state(uint16_t dial0, int16_t dial1){
 
 
 uint8_t get_dial(enum DialIdx_t dial){
-    return current_position[dial];
+    return new_position[dial];
 }
