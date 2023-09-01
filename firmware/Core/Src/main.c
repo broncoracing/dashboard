@@ -109,6 +109,10 @@ void can_irq(CAN_HandleTypeDef *pcan) {
       case ECU_DBW_ID:
 
         break;
+      case ECU_DIAG_ID:
+        carState.check_engine = read_field_u8(&ECU_DIAG_ecu_check_engine, data);
+        carState.ecu_fault_code = read_field_u8(&ECU_DIAG_ecu_fault_code, data);
+        break;
 
       case DYNO_CONTROLLER_ID:
         connect_dyno(); // Switch to dyno UI, since we got a dyno packet

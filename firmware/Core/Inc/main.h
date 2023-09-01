@@ -64,6 +64,9 @@ struct CarState {
   
   // CAN Timeout
   uint32_t last_message_tick; // Warning - will overflow if left running for a few months!
+
+  uint8_t check_engine;
+  uint8_t ecu_fault_code;
 };
 extern struct CarState carState;
 

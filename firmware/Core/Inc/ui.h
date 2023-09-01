@@ -21,6 +21,7 @@ enum UI_State_t {
     UI_CANT, // bus is unable to can
     UI_ENGINE_OFF,
     UI_ENGINE_RUNNING,
+    UI_DIAGNOSTICS,
     UI_DYNO_DISPLAY,
     UI_NUM_STATES
 };
@@ -28,6 +29,9 @@ enum UI_State_t {
 extern uint8_t auto_brightness_enabled;
 
 extern enum UI_State_t ui_state;
+
+// set to true by resetting in ui menu
+extern uint8_t ui_clear_faults;
 
 void init_ui(void);
 

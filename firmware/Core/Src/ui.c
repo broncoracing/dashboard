@@ -8,7 +8,13 @@
 #include "button.h"
 enum UI_State_t ui_state = UI_STARTUP_ANIM;
 
+uint8_t ui_clear_faults = 0;
+
 uint8_t auto_brighness_enabled = 0;
+
+int32_t ui_diag_timer = 0;
+int32_t rainbow_timer = 0;
+uint8_t rainbow_mode = 0;
 
 int32_t startup_anim_timer;
 int32_t startup_wipe_var;
@@ -19,6 +25,7 @@ enum StartupAnimState_t {
 } startup_anim_state;
 
 void update_state(enum UI_State_t new_state){
+  ui_clear_faults = 0;
   // Clean up from current state
   switch(ui_state) {
     case UI_STARTUP_ANIM:
@@ -214,13 +221,45 @@ void engine_status_lights(void) {
   } else {
     write_status(7, COLOR_GREEN);
   }
-  // check engine light (always on)
-  write_status(3, COLOR_RED);
+  // check engine light
+  if(carState.check_engine){
+    write_status(3, COLOR_RED);
+  }
+}
 
+// process toggling into/out of diagnostic mode
+void diagnostic_toggle(void) {
+  if(get_button(BTN_LOG_MARKER) && get_button(BTN_LAUNCH_CTRL)) {
+    write_shift_lights(0, 8, COLOR_CYAN);
+    ui_diag_timer++;
+    if(ui_diag_timer > 200) {
+      if(ui_state == UI_DIAGNOSTICS) {
+        update_state(UI_ENGINE_OFF);
+      } else {
+        update_state(UI_DIAGNOSTICS);
+      }
+      ui_diag_timer = 0;
+    }
+  } else {
+    ui_diag_timer = 0;
+  }
 }
 
 void update_ui(void) {
-    wipe_display();
+    if(get_button(BTN_UPSHIFT) && get_button(BTN_DOWNDHIFT)) {
+      rainbow_timer++;
+      if(rainbow_timer > 300) {
+        rainbow_mode = !rainbow_mode;
+        rainbow_timer = 0;
+      }
+    }
+
+    if(rainbow_mode) {
+      rainbow_offset += 5;
+      shade_display(rainbow);
+    } else {
+      wipe_display();
+    }
 
     // If CAN is missing, switch to the CANT state
     if(HAL_GetTick() - carState.last_message_tick > NO_CAN_TIMEOUT) {
@@ -294,6 +333,8 @@ void update_ui(void) {
             draw_tach();
 
             engine_status_lights();
+
+            diagnostic_toggle();
           }
           
           break;
@@ -314,10 +355,24 @@ void update_ui(void) {
 
             draw_shift_lights();
             draw_tach();
+
+            diagnostic_toggle();
           }
           
           break;
+        case UI_DIAGNOSTICS:
+          {
+            for(uint8_t btn = 0; btn < NUM_BTNS; ++btn) {
+              if(get_button(btn)) {
+                write_shift_lights(btn, 1, COLOR_WHITE);
+              }
+            }
 
+            ui_clear_faults = get_button(BTN_UPSHIFT) && get_button(BTN_DOWNDHIFT);
+            write_int(carState.ecu_fault_code, DIGIT_0, 3, COLOR_RED);
+            diagnostic_toggle();
+          }
+          break;
         case UI_DYNO_DISPLAY:
          {
             // Write target RPM

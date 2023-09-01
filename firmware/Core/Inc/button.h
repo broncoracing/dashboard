@@ -10,7 +10,7 @@ enum ButtonInput_t {
     BTN_UPSHIFT=1,
     BTN_2,
     BTN_DOWNDHIFT=3,
-    BTN_4,
+    BTN_LOG_MARKER=4,
     BTN_LAUNCH_CTRL=5,
     NUM_BTNS
 };

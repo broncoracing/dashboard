@@ -27,6 +27,7 @@
 #include "adc.h"
 #include "can-ids/CAN.h"
 #include "button.h"
+#include "ui.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -235,6 +236,13 @@ void SysTick_Handler(void)
 
     if(get_button(BTN_LAUNCH_CTRL)) {
       data[0] |= 1 << DASHBOARD_1_launch_ctrl.start;
+    }
+    if(get_button(BTN_LOG_MARKER)) {
+      data[0] |= 1 << DASHBOARD_1_btn3.start;
+    }
+
+    if(ui_clear_faults) {
+      data[0] |= 1 << DASHBOARD_1_clear_faults.start;
     }
     
     HAL_CAN_AddTxMessage(&hcan, &can1_hdr, data, &mailbox);
