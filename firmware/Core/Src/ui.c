@@ -274,6 +274,8 @@ void update_ui(void) {
         rainbow_mode = !rainbow_mode;
         rainbow_timer = 0;
       }
+    } else {
+      rainbow_timer = 0;
     }
 
     if(rainbow_mode) {
@@ -407,7 +409,7 @@ void update_ui(void) {
 
             // write_int(adc)
 
-            ui_clear_faults = get_button(BTN_LOG_MARKER);
+            ui_clear_faults = get_button(BTN_LOG_MARKER) && (!get_button(BTN_LAUNCH_CTRL));
             write_int(carState.ecu_fault_code, DIGIT_0, 3, COLOR_RED);
             diagnostic_toggle();
           }
