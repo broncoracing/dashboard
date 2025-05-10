@@ -1542,7 +1542,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
+		(property "Footprint" "LED_SMD:LED_Kingbright_AAA3528ESGCT"
 			(at 157.48 156.21 0)
 			(effects
 				(font
@@ -1746,7 +1746,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
+		(property "Footprint" "LED_SMD:LED_Kingbright_AAA3528ESGCT"
 			(at 121.92 99.06 0)
 			(effects
 				(font
@@ -1850,7 +1850,7 @@
 				)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
+		(property "Footprint" "LED_SMD:LED_Kingbright_AAA3528ESGCT"
 			(at 105.41 54.61 0)
 			(effects
 				(font
@@ -2043,7 +2043,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
+		(property "Footprint" "LED_SMD:LED_Kingbright_AAA3528ESGCT"
 			(at 128.27 120.65 0)
 			(effects
 				(font
@@ -2324,7 +2324,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
+		(property "Footprint" "LED_SMD:LED_Kingbright_AAA3528ESGCT"
 			(at 95.25 102.87 0)
 			(effects
 				(font
@@ -2429,7 +2429,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
+		(property "Footprint" "LED_SMD:LED_Kingbright_AAA3528ESGCT"
 			(at 106.68 99.06 0)
 			(effects
 				(font
@@ -2534,7 +2534,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
+		(property "Footprint" "LED_SMD:LED_Kingbright_AAA3528ESGCT"
 			(at 95.25 62.23 0)
 			(effects
 				(font
@@ -2826,7 +2826,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
+		(property "Footprint" "LED_SMD:LED_Kingbright_AAA3528ESGCT"
 			(at 95.25 77.47 0)
 			(effects
 				(font
@@ -3116,7 +3116,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
+		(property "Footprint" "LED_SMD:LED_Kingbright_AAA3528ESGCT"
 			(at 128.27 105.41 0)
 			(effects
 				(font
@@ -3320,7 +3320,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
+		(property "Footprint" "LED_SMD:LED_Kingbright_AAA3528ESGCT"
 			(at 120.65 54.61 0)
 			(effects
 				(font
@@ -3612,7 +3612,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
+		(property "Footprint" "LED_SMD:LED_Kingbright_AAA3528ESGCT"
 			(at 95.25 118.11 0)
 			(effects
 				(font
@@ -3717,7 +3717,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
+		(property "Footprint" "LED_SMD:LED_Kingbright_AAA3528ESGCT"
 			(at 128.27 64.77 0)
 			(effects
 				(font
@@ -3921,7 +3921,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
+		(property "Footprint" "LED_SMD:LED_Kingbright_AAA3528ESGCT"
 			(at 128.27 80.01 0)
 			(effects
 				(font
@@ -4027,7 +4027,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
+		(property "Footprint" "LED_SMD:LED_Kingbright_AAA3528ESGCT"
 			(at 118.11 146.05 0)
 			(effects
 				(font
@@ -4232,7 +4232,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
+		(property "Footprint" "LED_SMD:LED_Kingbright_AAA3528ESGCT"
 			(at 102.87 146.05 0)
 			(effects
 				(font
