@@ -165,7 +165,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "power-flag"
+			(property "ki_keywords" "global power"
 				(at 0 0 0)
 				(effects
 					(font
@@ -350,7 +350,7 @@
 			(uuid "2574aa2d-fd24-4da3-a21a-c27dfba53a75")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e"
 					(reference "H3")
 					(unit 1)
@@ -417,7 +417,7 @@
 			(uuid "4162e756-c839-4066-8650-da9cd9f59178")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e"
 					(reference "H2")
 					(unit 1)
@@ -484,7 +484,7 @@
 			(uuid "a6756d63-e14a-494d-afac-e9372cc3a00c")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e"
 					(reference "H4")
 					(unit 1)
@@ -550,7 +550,7 @@
 			(uuid "ea36f12d-66fb-4dc7-92ea-87abe4c24b70")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e"
 					(reference "#PWR0106")
 					(unit 1)
@@ -617,7 +617,7 @@
 			(uuid "e5146b13-64fe-4716-a0a7-945f5c54e3eb")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e"
 					(reference "H1")
 					(unit 1)

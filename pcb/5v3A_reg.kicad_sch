@@ -590,102 +590,6 @@
 				)
 			)
 		)
-		(symbol "PWR_FLAG_1"
-			(power)
-			(pin_numbers hide)
-			(pin_names
-				(offset 0) hide)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "#FLG"
-				(at 0 1.905 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Value" "PWR_FLAG"
-				(at 0 3.81 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Special symbol for telling ERC where power comes from"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "flag power"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "PWR_FLAG_1_0_0"
-				(pin power_out line
-					(at 0 0 90)
-					(length 0)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(symbol "PWR_FLAG_1_0_1"
-				(polyline
-					(pts
-						(xy 0 0) (xy 0 1.27) (xy -1.016 1.905) (xy 0 2.54) (xy 1.016 1.905) (xy 0 1.27)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-		)
 		(symbol "Regulator_Switching:ADP2303ARDZ-5.0"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -984,7 +888,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "power-flag"
+			(property "ki_keywords" "global power"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1080,7 +984,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "power-flag"
+			(property "ki_keywords" "flag power"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1174,26 +1078,10 @@
 		(uuid "87d7fec0-f283-47d2-9e1b-cb7c2afbe970")
 	)
 	(junction
-		(at 125.73 69.85)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "a639394f-1fd7-40fc-a696-33aa4e3ce3ef")
-	)
-	(junction
 		(at 120.65 69.85)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "dcb28205-dc44-4eaf-9003-76f2445d1343")
-	)
-	(wire
-		(pts
-			(xy 120.65 69.85) (xy 125.73 69.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "10fe53cd-a2ab-4eed-b651-41ba3081c833")
 	)
 	(wire
 		(pts
@@ -1244,16 +1132,6 @@
 			(type default)
 		)
 		(uuid "5b45b683-4e42-4c68-aff4-6029cfd0f07b")
-	)
-	(wire
-		(pts
-			(xy 125.73 69.85) (xy 130.81 69.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5dce71b9-a630-454f-adbd-e5b960bfc147")
 	)
 	(wire
 		(pts
@@ -1334,6 +1212,16 @@
 			(type default)
 		)
 		(uuid "be302fc9-5d42-47d4-b010-288481fad680")
+	)
+	(wire
+		(pts
+			(xy 120.65 69.85) (xy 130.81 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c6db833f-1310-4e4a-b1e1-e7ace8309d58")
 	)
 	(wire
 		(pts
@@ -1501,7 +1389,7 @@
 			(uuid "c1883b49-247a-4402-96c3-18bb7a25fd56")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/785c2b5b-0f6e-472e-8e4b-b02b70d5cf35/bb437566-7d32-450d-b77e-65f68738184c"
 					(reference "C102")
 					(unit 1)
@@ -1572,7 +1460,7 @@
 			(uuid "a101c505-8911-4547-b317-08f583b2cb7a")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/785c2b5b-0f6e-472e-8e4b-b02b70d5cf35/bb437566-7d32-450d-b77e-65f68738184c"
 					(reference "#PWR0194")
 					(unit 1)
@@ -1643,7 +1531,7 @@
 			(uuid "b9b990e2-93f2-4467-a45e-6f9b33a05712")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/785c2b5b-0f6e-472e-8e4b-b02b70d5cf35/bb437566-7d32-450d-b77e-65f68738184c"
 					(reference "#PWR0195")
 					(unit 1)
@@ -1725,7 +1613,7 @@
 			(uuid "d5561322-d9f5-46eb-bd79-6ec81aea6889")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/785c2b5b-0f6e-472e-8e4b-b02b70d5cf35/bb437566-7d32-450d-b77e-65f68738184c"
 					(reference "C101")
 					(unit 1)
@@ -1808,7 +1696,7 @@
 			(uuid "6464f9f4-1483-4ae0-a3d7-d0d00680a1f6")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/785c2b5b-0f6e-472e-8e4b-b02b70d5cf35/bb437566-7d32-450d-b77e-65f68738184c"
 					(reference "D129")
 					(unit 1)
@@ -1865,7 +1753,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Nonsynchronous Step-Down Regulator 3 Amp Vout 5.0v SOIC-8"
+		(property "Description" ""
 			(at 146.05 74.93 0)
 			(effects
 				(font
@@ -1911,84 +1799,13 @@
 			(uuid "3513305e-7301-49d5-9810-29dafe900ad0")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/785c2b5b-0f6e-472e-8e4b-b02b70d5cf35/bb437566-7d32-450d-b77e-65f68738184c"
 					(reference "U6")
 					(unit 1)
 				)
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/785c2b5b-0f6e-472e-8e4b-b02b70d5cf35/f73c095e-19b5-4ca2-82b2-71d1369b65a4"
 					(reference "U2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_name "PWR_FLAG_1")
-		(lib_id "power:PWR_FLAG")
-		(at 125.73 69.85 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "a08dd008-1517-4505-baa5-fa805be3b769")
-		(property "Reference" "#FLG02"
-			(at 125.73 67.945 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "PWR_FLAG"
-			(at 125.73 64.77 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 125.73 69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 125.73 69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 125.73 69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "f5f37601-5adb-4010-9d6c-91532929ca05")
-		)
-		(instances
-			(project ""
-				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/785c2b5b-0f6e-472e-8e4b-b02b70d5cf35/bb437566-7d32-450d-b77e-65f68738184c"
-					(reference "#FLG03")
-					(unit 1)
-				)
-				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/785c2b5b-0f6e-472e-8e4b-b02b70d5cf35/f73c095e-19b5-4ca2-82b2-71d1369b65a4"
-					(reference "#FLG02")
 					(unit 1)
 				)
 			)
@@ -2063,7 +1880,7 @@
 			(uuid "2421fab9-2542-485c-bba3-a5acdaac9dd7")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/785c2b5b-0f6e-472e-8e4b-b02b70d5cf35/bb437566-7d32-450d-b77e-65f68738184c"
 					(reference "L2")
 					(unit 1)
@@ -2134,7 +1951,7 @@
 			(uuid "bea254fd-9ec2-4064-be2d-5f7392430979")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/785c2b5b-0f6e-472e-8e4b-b02b70d5cf35/bb437566-7d32-450d-b77e-65f68738184c"
 					(reference "#PWR0192")
 					(unit 1)
@@ -2211,13 +2028,13 @@
 			)
 		)
 		(pin "1"
-			(uuid "758a8e87-0440-4574-a56b-e10e8cacbac4")
+			(uuid "070f8bcb-cde5-4f15-955c-21b9e397a437")
 		)
 		(pin "2"
-			(uuid "284bee18-7351-4ed8-83bc-8bdfbb442b5a")
+			(uuid "ab634ad9-e3f2-4345-9d49-5a0065ed6793")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/785c2b5b-0f6e-472e-8e4b-b02b70d5cf35/bb437566-7d32-450d-b77e-65f68738184c"
 					(reference "C100")
 					(unit 1)
@@ -2288,7 +2105,7 @@
 			(uuid "bf1a4e72-59a6-4687-b919-e7fbddb6020c")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/785c2b5b-0f6e-472e-8e4b-b02b70d5cf35/bb437566-7d32-450d-b77e-65f68738184c"
 					(reference "#PWR0193")
 					(unit 1)
@@ -2357,7 +2174,7 @@
 			(uuid "28d7796c-2bdb-4408-8b68-46d44df8b3fe")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/785c2b5b-0f6e-472e-8e4b-b02b70d5cf35/bb437566-7d32-450d-b77e-65f68738184c"
 					(reference "#FLG0106")
 					(unit 1)
@@ -2439,7 +2256,7 @@
 			(uuid "6ba36046-9612-4aab-a9bc-793f9d4bc483")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/785c2b5b-0f6e-472e-8e4b-b02b70d5cf35/bb437566-7d32-450d-b77e-65f68738184c"
 					(reference "R2")
 					(unit 1)

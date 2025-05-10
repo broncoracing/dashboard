@@ -446,7 +446,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "power-flag"
+			(property "ki_keywords" "global power"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1173,6 +1173,17 @@
 		)
 		(uuid "ffdb93d6-a448-4ecc-88eb-e4ab7b97036f")
 	)
+	(text "NOTE: DATA_IN goes to DOUT and DATA_OUT goes to DIN\nThis is because the 3529 WS2812 footprint swaps these pins for some god-forsaken reason.\nAnd I was way too lazy to redo this whole sub-schematic and make a new symbol just to fix that."
+		(exclude_from_sim no)
+		(at 170.18 90.17 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "82f34ad3-b63a-485c-8d1f-2267528ead43")
+	)
 	(label "DP"
 		(at 148.59 148.59 180)
 		(fields_autoplaced yes)
@@ -1395,18 +1406,6 @@
 	)
 	(hierarchical_label "DATA_OUT"
 		(shape input)
-		(at 163.83 148.59 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "63cf018a-2ae0-4073-b17b-09d79be2b872")
-	)
-	(hierarchical_label "DATA_IN"
-		(shape input)
 		(at 96.52 46.99 180)
 		(fields_autoplaced yes)
 		(effects
@@ -1415,7 +1414,19 @@
 			)
 			(justify right)
 		)
-		(uuid "6e852b36-32e7-4834-8d60-478f58f00f9a")
+		(uuid "b9c7ac4a-db0f-40ce-ac16-34439ac7a24f")
+	)
+	(hierarchical_label "DATA_IN"
+		(shape input)
+		(at 163.83 148.59 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "ee31bff9-92a9-4eb2-a02a-8070e0410719")
 	)
 	(symbol
 		(lib_id "power:GND")
@@ -1477,7 +1488,7 @@
 			(uuid "303b3d2b-b814-4806-806e-0ec90c0ab40e")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "#PWR0183")
 					(unit 1)
@@ -1531,7 +1542,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B"
+		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
 			(at 157.48 156.21 0)
 			(effects
 				(font
@@ -1573,7 +1584,7 @@
 			(uuid "9d12e4bb-dcb3-4874-a39a-945f7f4fe192")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "D127")
 					(unit 1)
@@ -1672,7 +1683,7 @@
 			(uuid "7666ba74-3b76-42df-aed5-54ca74740447")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "C93")
 					(unit 1)
@@ -1726,7 +1737,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B"
+		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
 			(at 121.92 99.06 0)
 			(effects
 				(font
@@ -1768,7 +1779,7 @@
 			(uuid "29e1f2da-fce1-4c34-b0f9-cbf500ca7a63")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "D122")
 					(unit 1)
@@ -1821,7 +1832,7 @@
 				)
 			)
 		)
-		(property "Footprint" "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B"
+		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
 			(at 105.41 54.61 0)
 			(effects
 				(font
@@ -1863,7 +1874,7 @@
 			(uuid "dd7b63a3-23fe-4aa0-954f-e7b0768fce94")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "D117")
 					(unit 1)
@@ -1951,7 +1962,7 @@
 			(uuid "14ce7c2a-67f7-4efd-99b3-7f7ad23830d9")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "#PWR0185")
 					(unit 1)
@@ -2005,7 +2016,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B"
+		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
 			(at 128.27 120.65 0)
 			(effects
 				(font
@@ -2047,7 +2058,7 @@
 			(uuid "f4f059c7-e1e6-49ad-bfa8-cf2f6e817908")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "D126")
 					(unit 1)
@@ -2135,7 +2146,7 @@
 			(uuid "bdeb8e7e-e63a-46da-863f-899ad2fee76a")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "#PWR0184")
 					(unit 1)
@@ -2223,7 +2234,7 @@
 			(uuid "1cadf1fb-1b96-41ee-bb1a-6c61073ab307")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "#PWR0186")
 					(unit 1)
@@ -2277,7 +2288,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B"
+		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
 			(at 95.25 102.87 0)
 			(effects
 				(font
@@ -2319,7 +2330,7 @@
 			(uuid "e381985e-7ed9-4ee0-8554-2c7f75b5048a")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "D115")
 					(unit 1)
@@ -2373,7 +2384,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B"
+		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
 			(at 106.68 99.06 0)
 			(effects
 				(font
@@ -2415,7 +2426,7 @@
 			(uuid "758b9a3c-0988-491f-a999-c608eaff8a26")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "D119")
 					(unit 1)
@@ -2469,7 +2480,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B"
+		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
 			(at 95.25 62.23 0)
 			(effects
 				(font
@@ -2511,7 +2522,7 @@
 			(uuid "647beed8-df50-4c6f-bddf-a4a501ecc3af")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "D113")
 					(unit 1)
@@ -2599,7 +2610,7 @@
 			(uuid "dbc78e6f-a81f-4d9d-9a6e-0800e5eeb04c")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "#PWR0182")
 					(unit 1)
@@ -2698,7 +2709,7 @@
 			(uuid "816aeaa0-0cc7-405c-b0de-a1941a5699d3")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "C95")
 					(unit 1)
@@ -2752,7 +2763,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B"
+		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
 			(at 95.25 77.47 0)
 			(effects
 				(font
@@ -2794,7 +2805,7 @@
 			(uuid "9cc2a4d9-89c8-4175-86e9-d8cef117ec34")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "D114")
 					(unit 1)
@@ -2892,7 +2903,7 @@
 			(uuid "eeaaf4f4-a953-4dfa-80e3-d078488f89fa")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "C89")
 					(unit 1)
@@ -2979,7 +2990,7 @@
 			(uuid "a9a893ea-adc2-442b-90f6-a0df03aedb76")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "#PWR0178")
 					(unit 1)
@@ -3033,7 +3044,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B"
+		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
 			(at 128.27 105.41 0)
 			(effects
 				(font
@@ -3075,7 +3086,7 @@
 			(uuid "65134103-fff1-4e47-9ec5-d9bb95b3c555")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "D125")
 					(unit 1)
@@ -3174,7 +3185,7 @@
 			(uuid "7f9e35af-5200-4073-a736-9db89490a997")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "C90")
 					(unit 1)
@@ -3228,7 +3239,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B"
+		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
 			(at 120.65 54.61 0)
 			(effects
 				(font
@@ -3270,7 +3281,7 @@
 			(uuid "5a73af94-0350-4b3f-89ae-a901b9d7378c")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "D120")
 					(unit 1)
@@ -3369,7 +3380,7 @@
 			(uuid "903111b8-95b8-48da-842d-8eea40fc5cfd")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "C92")
 					(unit 1)
@@ -3457,7 +3468,7 @@
 			(uuid "6bad0cac-3fb5-4ee6-9dd4-1ac4a8b5f3e8")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "#PWR0179")
 					(unit 1)
@@ -3511,7 +3522,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B"
+		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
 			(at 95.25 118.11 0)
 			(effects
 				(font
@@ -3553,7 +3564,7 @@
 			(uuid "47a24b28-14a3-4f0c-a639-a96dbbe1a476")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "D116")
 					(unit 1)
@@ -3607,7 +3618,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B"
+		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
 			(at 128.27 64.77 0)
 			(effects
 				(font
@@ -3649,7 +3660,7 @@
 			(uuid "69cacd2c-8816-4850-949c-7725165200e9")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "D123")
 					(unit 1)
@@ -3748,7 +3759,7 @@
 			(uuid "4fd46991-c00b-4f20-8f65-bb9938b2fdcf")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "C94")
 					(unit 1)
@@ -3802,7 +3813,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B"
+		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
 			(at 128.27 80.01 0)
 			(effects
 				(font
@@ -3844,7 +3855,7 @@
 			(uuid "5bdb1ca3-66b7-45bf-b4f1-2cf416ebe186")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "D124")
 					(unit 1)
@@ -3899,7 +3910,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B"
+		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
 			(at 118.11 146.05 0)
 			(effects
 				(font
@@ -3941,7 +3952,7 @@
 			(uuid "223ffc68-5f25-4005-aaee-7dccd49573ff")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "D121")
 					(unit 1)
@@ -4040,7 +4051,7 @@
 			(uuid "94c61bfe-01a9-4c93-88cf-09e2dbb579a6")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "C91")
 					(unit 1)
@@ -4095,7 +4106,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "XL-3528RGBW-WS2812B:XL-3528RGBW-WS2812B"
+		(property "Footprint" "LED_SMD:LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm"
 			(at 102.87 146.05 0)
 			(effects
 				(font
@@ -4137,7 +4148,7 @@
 			(uuid "4b38b874-6dd4-44b7-a021-21ca9278ed95")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "D118")
 					(unit 1)
@@ -4225,7 +4236,7 @@
 			(uuid "eb6e3b01-19d2-458d-b00a-d8af34dce3c7")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "#PWR0187")
 					(unit 1)
@@ -4313,7 +4324,7 @@
 			(uuid "56031e6a-b55a-4830-8e56-7447a96e8dad")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "#PWR0180")
 					(unit 1)
@@ -4412,7 +4423,7 @@
 			(uuid "d41ff48d-5264-42d4-80c3-dbae82eec7ff")
 		)
 		(instances
-			(project ""
+			(project "PCB"
 				(path "/68f34db6-b185-48e2-8817-fb07f7d1240e/c2620eae-eace-4cc3-85c7-9b52b66bfb25/4df892e7-ad06-4575-bd9f-6af6e3df74ab"
 					(reference "C96")
 					(unit 1)
