@@ -87,9 +87,9 @@ void can_irq(CAN_HandleTypeDef *pcan) {
   if(msg.IDE == CAN_ID_STD) { // Standard CAN ID
     switch (msg.StdId)
       {
-      case BOOTLOADER_ID:
-        __NVIC_SystemReset(); // Reset to bootloader
-        break;
+      // case BOOTLOADER_ID:
+      //   __NVIC_SystemReset(); // Reset to bootloader
+      //   break;
       case ECU_1_ID:
         carState.rpm = read_field_u16(&ECU_1_rpm, data);
         carState.lambda = read_field_u16(&ECU_1_lamda, data);
@@ -154,7 +154,7 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
   // relocate vector table to work with bootloader
-	SCB->VTOR = (uint32_t)0x08003000;
+	// SCB->VTOR = (uint32_t)0x08003000;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/

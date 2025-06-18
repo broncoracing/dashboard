@@ -155,8 +155,8 @@ void write_strip_8x(union color_t buffer[STRIPS_PER_GROUP * NUM_GROUPS][STRIP_LE
     write_strip_4x(buffer, 0);
     // Start DMA for first group
     ws2812_dma_start(&bssr0[0][0][0], 0);
-    // Generate data for second group
-    write_strip_4x(&buffer[4][0], 1);
+  // Generate data for second group
+    write_strip_4x((union color_t (*)[STRIP_LENGTH])&buffer[4], 1);
     // If the DMA transaction is still happening, wait for it to finish.
     ws2812_dma_wait();
     // Clear the port to zero (should already be zero)
