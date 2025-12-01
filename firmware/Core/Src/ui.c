@@ -21,7 +21,7 @@ int32_t startup_wipe_var;
 enum StartupAnimState_t {
   SA_Bronco,
   SA_Racing,
-  SA_BR23,
+  SA_BR26,
 } startup_anim_state;
 
 void update_state(enum UI_State_t new_state){
@@ -102,11 +102,11 @@ void startup_animation(void) {
         write_char(n_7SEG, DIGIT_4, 0, COLOR_GOLD);
         write_char(g_7SEG, DIGIT_5, 0, COLOR_GOLD);
         if(startup_anim_timer > 75) {
-          startup_anim_state = SA_BR23;
+          startup_anim_state = SA_BR26;
           startup_anim_timer = 0;
         }
       break;
-    case SA_BR23:
+    case SA_BR26:
       if(startup_anim_timer < 50){
         wipe_anim_brightness = 50;
         startup_wipe_var += 2;
@@ -122,7 +122,7 @@ void startup_animation(void) {
       write_char(r_7SEG, DIGIT_2, 0, text_col);
       write_char(dash_7SEG, DIGIT_3, 0, text_col);
       write_digit(2, DIGIT_4, 0, text_col);
-      write_digit(3, DIGIT_5, 0, text_col);
+      write_digit(6, DIGIT_5, 0, text_col);
       break;
   }
 }
@@ -309,7 +309,7 @@ void update_ui(void) {
             break;
           }
           startup_animation();
-          if(startup_anim_timer > 150 && startup_anim_state == SA_BR23) {
+          if(startup_anim_timer > 150 && startup_anim_state == SA_BR26) {
             update_state(UI_ENGINE_OFF);
           }
           break;
