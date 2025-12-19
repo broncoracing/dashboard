@@ -2,7 +2,7 @@
 /**
   ******************************************************************************
   * @file           : main.c
-  * @brief          : Main program body
+  * @brief          : Main program body - EV Dashboard 2026
   ******************************************************************************
   * @attention
   *
@@ -28,7 +28,7 @@
 #include "display.h"
 #include "auto_brightness.h"
 #include "dial.h"
-
+#include "ui.h"
 #include "can-ids/CAN.h"
 /* USER CODE END Includes */
 
@@ -62,6 +62,7 @@ DMA_HandleTypeDef hdma_tim2_ch2_ch4;
 volatile uint16_t adc_buffer[2][11];
 volatile uint8_t adc_buffer_idx = 0;
 volatile uint8_t adc_ready = 1;
+struct CarState carState;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -81,55 +82,118 @@ extern void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc);
 
 
 void can_irq(CAN_HandleTypeDef *pcan) {
-  carState.last_message_tick = HAL_GetTick();
-
   CAN_RxHeaderTypeDef msg;
-  uint8_t data[8];
-  HAL_CAN_GetRxMessage(pcan, CAN_RX_FIFO0, &msg, data);
+    uint8_t data[8];
+    HAL_CAN_GetRxMessage(pcan, CAN_RX_FIFO0, &msg, data);
+    
+    if (msg.IDE == CAN_ID_STD) {
+        switch (msg.StdId) {
+            // ===== INVERTER MESSAGES =====
+            
+            case INVERTER_HIGH_SPEED_ID:
+                // High-speed frame (3ms) - most important data
+                carState.commanded_torque = read_field_i16(&INVERTER_HIGH_SPEED_commanded_torque, data);
+                carState.torque_feedback = read_field_i16(&INVERTER_HIGH_SPEED_torque_feedback, data);
+                carState.motor_speed = read_field_i16(&INVERTER_HIGH_SPEED_motor_speed, data);
+                carState.dc_bus_voltage = read_field_i16(&INVERTER_HIGH_SPEED_dc_bus_voltage, data);
+                carState.last_inverter_msg_tick = HAL_GetTick();
+                break;
+                
+            case INVERTER_TEMP_1_ID:
+                // IGBT temperatures
+                carState.igbt_a_temp = read_field_i16(&INVERTER_TEMP_1_IGBT_A_temp, data);
+                carState.igbt_b_temp = read_field_i16(&INVERTER_TEMP_1_IGBT_B_temp, data);
+                carState.igbt_c_temp = read_field_i16(&INVERTER_TEMP_1_IGBT_C_temp, data);
+                carState.gate_driver_temp = read_field_i16(&INVERTER_TEMP_1_gate_driver_temp, data);
+                break;
+                
+            case INVERTER_TEMP_2_ID:
+                // Control board and RTD temperatures
+                carState.control_board_temp = read_field_i16(&INVERTER_TEMP_2_control_board_temp, data);
+                // RTD temps available if needed
+                break;
+                
+            case INVERTER_TEMP_3_ID:
+                // Motor temperature
+                carState.motor_temp = read_field_i16(&INVERTER_TEMP_3_motor_temp, data);
+                break;
+                
+            case INVERTER_CURRENT_ID:
+                // DC bus current
+                carState.dc_bus_current = read_field_i16(&INVERTER_CURRENT_dc_bus, data);
+                break;
+                
+            case INVERTER_INTERNAL_VOLTAGE_ID:
+                // 12V (GLV) voltage
+                carState.glv_voltage = read_field_i16(&INVERTER_INTERNAL_VOLTAGE_glv_voltage, data);
+                break;
+                
+            case INVERTER_INTERNAL_STATES_ID:
+                // Inverter state machine
+                carState.vsm_state = read_field_u8(&INVERTER_INTERNAL_STATES_vsm_state, data);
+                carState.inverter_state = read_field_u8(&INVERTER_INTERNAL_STATES_inverter_state, data);
+                carState.inverter_enable = read_field_u8(&INVERTER_INTERNAL_STATES_enable_state, data);
+                carState.direction_command = read_field_u8(&INVERTER_INTERNAL_STATES_direction_command, data);
+                carState.run_mode = read_field_u8(&INVERTER_INTERNAL_STATES_run_mode, data);
+                break;
+                
+            case INVERTER_FAULT_CODES_ID:
+                // Fault codes
+                carState.post_fault = read_field_u32(&INVERTER_FAULT_CODES_POST_fault, data);
+                carState.run_fault = read_field_u32(&INVERTER_FAULT_CODES_run_fault, data);
+                break;
+
+
+
+                // ===== ORION BMS MESSAGES =====
+            
+            case BMS_PACK_STATUS_ID:
+                // Pack SOC, Voltage, Current
+                carState.soc_percent = read_field_u8(&BMS_PACK_STATUS_pack_soc, data);
+                carState.pack_voltage = read_field_u16(&BMS_PACK_STATUS_pack_voltage, data);
+                carState.pack_current = read_field_i16(&BMS_PACK_STATUS_pack_current, data);
+                carState.last_bms_msg_tick = HAL_GetTick();
+                break;
+                
+            case BMS_TEMPS_ID:
+                // Battery temperatures
+                carState.pack_temp_max = read_field_i16(&BMS_TEMPS_max_cell_temp, data);
+                carState.pack_temp_min = read_field_i16(&BMS_TEMPS_min_cell_temp, data);
+                break;
+                
+            case BMS_STATUS_ID:
+                // BMS status and limits
+                carState.bms_fault_code = read_field_u8(&BMS_STATUS_fault_code, data);
+                // Pack discharge/charge limits available here if needed
+                break;
+                
+            // ===== DASHBOARD INPUTS (from steering wheel) =====
+            
+            case DASHBOARD_0_ID:
+                carState.dial_pos[0] = read_field_u8(&DASHBOARD_0_dial_0, data);
+                carState.dial_pos[1] = read_field_u8(&DASHBOARD_0_dial_1, data);
+                break;
+                
   
-  if(msg.IDE == CAN_ID_STD) { // Standard CAN ID
-    switch (msg.StdId)
-      {
-      case BOOTLOADER_ID:
-        __NVIC_SystemReset(); // Reset to bootloader
-        break;
-      case ECU_1_ID:
+                
+            
+            // ===== BOOTLOADER =====
+            
+            case BOOTLOADER_ID:
+                // Reset to bootloader if requested
+                __NVIC_SystemReset();
+                break;
+                
+            default:
+                // Unknown message
 
-        break;
-      case ECU_2_ID:
-
-        break;
-      case ECU_3_ID:
-        carState.battery_voltage = read_field_u16(&ECU_3_battery_voltage, data);
-        break;
-      case ECU_4_ID:
-
-        break;
-      case ECU_DBW_ID:
-
-        break;
-
-      default:
-        // carState.rpm = msg.StdId; // For testing
+  
         break;
       }
   } 
 }
 
-uint8_t rainbow_offset = 0;
-union color_t rainbow(struct xy_t coord){
-  return hsv((coord.x + coord.y) * 3 + rainbow_offset, 255, 2);
-}
 
-union color_t full_blast(struct xy_t coord){
-  union color_t col = {.color={.r=255,.g=255,.b=255}};
-  return col;
-}
-
-
-
-
-struct CarState carState;
 
 
 
@@ -178,73 +242,49 @@ int main(void)
 
   HAL_ADCEx_Calibration_Start(&hadc1);
 
-  startup_animation();
+  // Initialize car state to safe defaults
+    carState.soc_percent = 50;  // Will be updated by BMS
+    carState.drive_mode = 1;    // Normal mode
+    carState.last_inverter_msg_tick = HAL_GetTick();
+    carState.last_bms_msg_tick = HAL_GetTick();
+
+    // Initialize UI
+    init_ui(); // includes startup animation
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    // Start ADC
-    if(adc_ready){
-      uint8_t new_idx = (adc_buffer_idx + 1) % 2;
-      HAL_ADC_Start_DMA(&hadc1, (uint32_t *) adc_buffer[new_idx], 11);
-      adc_ready = 0;
-    }
-
-    HAL_Delay(10); // ~100Hz Loop (Not even remotely precise, but it doesn't matter as long as it's fast enough)
-
-
-    // Update brightness
-    update_brightness(adc_buffer[adc_buffer_idx][9]);
-
-    // Update dial positions
-    update_dial_state(adc_buffer[adc_buffer_idx][0], adc_buffer[adc_buffer_idx][1]);    
-
-    // TODO Watchdog timer
     
-    // light up LEDs
-    rainbow_offset += 4;
-    // shade_display(&rainbow);
-    wipe_display();
-
-    write_digit(carState.dial_pos[0], DIGIT_0, 1, COLOR_RED);
-
-    // write_int(adc_buffer[adc_buffer_idx][0], DIGIT_2, 4, COLOR_YELLOW);
-
-    // write voltage
-    uint32_t voltage = carState.battery_voltage;
-    union color_t voltage_color;
-    if(voltage < 10 * ECU_3_battery_voltage.divisor){
-      voltage_color = flash(COLOR_RED, 250, 125);
-    } else if(voltage < 11 * ECU_3_battery_voltage.divisor){
-      voltage_color = COLOR_ORANGE;
-    } else if(voltage < 12 * ECU_3_battery_voltage.divisor){
-      voltage_color = COLOR_YELLOW;
-    } else {
-      voltage_color = COLOR_GREEN;
+        /* USER CODE BEGIN WHILE */
+        
+        // Start ADC conversion
+        if (adc_ready) {
+            uint8_t new_idx = (adc_buffer_idx + 1) % 2;
+            HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adc_buffer[new_idx], 11);
+            adc_ready = 0;
+        }
+        
+        // ~100Hz main loop
+        HAL_Delay(10);
+        
+        // Update brightness from ambient light sensor
+        update_brightness(adc_buffer[adc_buffer_idx][9]);
+        
+        // Update dial positions from ADC
+        update_dial_state(adc_buffer[adc_buffer_idx][0], 
+                         adc_buffer[adc_buffer_idx][1]);
+        
+        // Update UI (this replaces the manual display code)
+        update_ui();
+        
+        /* USER CODE END WHILE */
     }
-    write_fixedpoint(voltage, DIGIT_2, 4, 2, voltage_color);
-    
-    write_shift_lights(0, 4, COLOR_GREEN);
-    write_shift_lights(4, 4, COLOR_YELLOW);
-    write_shift_lights(8, 4, COLOR_ORANGE);
-    write_tach(0, 4, COLOR_RED);
-    write_status(3, COLOR_ORANGE);
-    write_status(4, voltage_color);
-    write_status(7, COLOR_BLUE);
-
-    update_display();
-    /* USER CODE END WHILE */
-
-    /* USER CODE BEGIN 3 */
-  }
-  /* USER CODE END 3 */
 }
 
 /**
   * @brief System Clock Configuration
-  * @retval None
   */
 void SystemClock_Config(void)
 {
@@ -442,11 +482,11 @@ static void MX_CAN_Init(void)
 
   /* USER CODE END CAN_Init 1 */
   hcan.Instance = CAN1;
-  hcan.Init.Prescaler = 9;
+  hcan.Init.Prescaler = 4;
   hcan.Init.Mode = CAN_MODE_NORMAL;
   hcan.Init.SyncJumpWidth = CAN_SJW_1TQ;
-  hcan.Init.TimeSeg1 = CAN_BS1_6TQ;
-  hcan.Init.TimeSeg2 = CAN_BS2_1TQ;
+  hcan.Init.TimeSeg1 = CAN_BS1_11TQ;
+  hcan.Init.TimeSeg2 = CAN_BS2_4TQ;
   hcan.Init.TimeTriggeredMode = DISABLE;
   hcan.Init.AutoBusOff = DISABLE;
   hcan.Init.AutoWakeUp = DISABLE;
@@ -463,11 +503,11 @@ static void MX_CAN_Init(void)
 
   // First filter - ECU messages
   sf.FilterMaskIdHigh = 0x700 << 5; // Filter by top 3 bits
-  sf.FilterIdHigh = ECU_1_ID << 5;
+  sf.FilterIdHigh = 0x0A0 << 5;
 
   // Second filter - Bootloader requests
   sf.FilterMaskIdLow = 0x7FF << 5;
-  sf.FilterIdLow = BOOTLOADER_ID << 5;
+  sf.FilterIdLow = 0x6B0 << 5;
 
   // Filters into CAN FIFO 0
   sf.FilterFIFOAssignment = CAN_FILTER_FIFO0;
